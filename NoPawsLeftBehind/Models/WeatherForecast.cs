@@ -1,6 +1,6 @@
 using System;
 
-namespace NoPawsLeftBehind
+namespace NoPawsLeftBehind.Models
 {
     public class WeatherForecast
     {
