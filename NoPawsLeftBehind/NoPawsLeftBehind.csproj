@@ -21,7 +21,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\public\images\" />
+    <None Remove="ClientApp\public\favicon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="ClientApp\public\Logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="ClientApp\public\images\Logo.png" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
