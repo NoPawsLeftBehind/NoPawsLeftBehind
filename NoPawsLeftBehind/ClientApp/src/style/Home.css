@@ -1,7 +1,21 @@
-﻿.logo {
-    margin: 25em, 10em, 0em 0em;
+﻿.mainDiv {
+    height: 100%;
+    width: 100%;
+    margin: 5vh;
+}
+
+.logo {
+    justify-content: center;
+    align-content: center;
 }
 
 .summary {
-    margin: 25em, 10em, 0em 0em;
+    margin: 10vh;
 }
+
+.paper {
+    height: 100%;
+    width: 100%;
+    align-content: center;
+}
+
