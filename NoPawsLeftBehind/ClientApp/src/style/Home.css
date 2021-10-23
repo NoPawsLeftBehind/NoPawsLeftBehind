@@ -9,8 +9,7 @@
 #img-paper {
     height: 72vh;
     max-width: 45vh;
-    align-content: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 #pup-img {

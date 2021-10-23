@@ -11,7 +11,7 @@ export class Footer extends Component {
                     <Grid container alignItems="center" justifyContent="center">
                         <Grid item xs={12} textAlign="center">
                             <Typography>
-                                No Paws Left Behind <Divider/> Copyright&copy; {new Date().getFullYear()}.
+                                No Paws Left Behind | Copyright&copy; {new Date().getFullYear()}.
                             </Typography>
                         </Grid>
                     </Grid>

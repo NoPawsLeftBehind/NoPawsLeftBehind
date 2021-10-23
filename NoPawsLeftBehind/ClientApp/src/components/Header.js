@@ -1,6 +1,5 @@
 ﻿import React, { Component } from 'react';
 import { Nav, Navbar, Container} from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import { Button, Stack } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import '../style/Header.css';
@@ -31,16 +30,16 @@ export class Header extends Component {
                             <Navbar.Brand href="#home">No Paws Left Behind</Navbar.Brand>
                             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                             <Navbar.Collapse id="responsive-navbar-nav">
-                                <Nav className="me-auto">
-                                    <Nav.Link to="/">Home</Nav.Link>
-                                    <Nav.Link to="/counter">About</Nav.Link>
-                                    <Nav.Link to="/fetch-data">Pet Search</Nav.Link>
-                                    <Nav.Link to="/counter">Contact</Nav.Link>
-                                    <Nav.Link to="/fetch-data">FAQ</Nav.Link>
+                                <Nav className="me-auto" mr-4>
+                                    <Nav.Link href="/">Home</Nav.Link>
+                                    <Nav.Link href="/counter">About</Nav.Link>
+                                    <Nav.Link href="/fetch-data">Pet Search</Nav.Link>
+                                    <Nav.Link href="/counter">Contact</Nav.Link>
+                                    <Nav.Link href="/fetch-data">FAQ</Nav.Link>
                                 </Nav>
                                 <Nav>
-                                    <Button color="secondary" >Login</Button>
-                                    <Button color="secondary" >Sign Up</Button>
+                                    <Button color="secondary">Login</Button>
+                                    <Button color="secondary">Sign Up</Button>
                                 </Nav>
                             </Navbar.Collapse>
                         </Container>
