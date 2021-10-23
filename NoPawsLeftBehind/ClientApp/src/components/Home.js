@@ -1,39 +1,45 @@
 import React, { Component } from 'react';
-import { Grid, Paper, Typography } from '@mui/material'
-import Logo from "../images/Logo.png";
+import { Paper, Divider, Button, Stack } from '@mui/material'
+import { ThemeProvider } from '@mui/material/styles';
+import { Footer } from './Footer.js';
+import Pup from "../images/pup-flower.jpg";
 import '../style/Home.css';
+import { appTheme } from './Theme.js'
 
 export class Home extends Component {
-    static displayName = Home.name;
-
     render() {
         return (
-            <div className="mainDiv">
-                <Grid container spacing={2}>
-                    <Grid item xs={6}>
-                        <Paper elevation={3} className="paper">
-                            <img src={Logo} className="logo" />
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Paper elevation={3} className="paper">
-                            <React.Fragment>
-                                <Typography variant="h4" component="div" className="summary">
-                                    Save a pet. Be a superhero!
-                                </Typography>
-                                <Typography variant="p" component="div" className="summary">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                                    and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
-                                    leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with
-                                    the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
-                                    software like Aldus PageMaker including versions of Lorem Ipsum.
-                                </Typography>
-                            </React.Fragment>
-                        </Paper>
-                    </Grid>
-                </Grid>
-            </div>
+            <ThemeProvider theme={appTheme}>
+                <div id="mainDiv">
+                    <div className="container">
+                        <div className="row">
+                            <Paper elevation={3} id="img-paper">
+                                <div className="col-xs-12 col-md-6">
+                                    {" "}
+                                    <img src={Pup} id="pup-img" alt="" />{" "}
+                                </div>
+                            </Paper>
+                            <div className="col-xs-12 col-md-6">
+                                <div className="landing-text">
+                                    <h2>Save a pet. Be a superhero!</h2>
+                                    <Divider />
+                                    <p>
+                                        Every year, millions of pets remain in shelters while potential owners search unable to find
+                                        a perfect pet match. No Paws Left Behind allows shelters to post profiles for pets available for adoption
+                                        so that future pet owners can browse and find their perfect pet. Help a pet find their forever home.
+                                        Sign up today!
+                                    </p>
+                                    <Stack>
+                                        <Button variant="contained" id="sign-up">Sign Up</Button>
+                                        <Button variant="outlined">Login</Button>
+                                    </Stack>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <Footer />
+            </ThemeProvider>
         );
     }
 }

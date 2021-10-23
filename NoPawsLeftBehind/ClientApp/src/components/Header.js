@@ -1,83 +1,50 @@
 ﻿import React, { Component } from 'react';
-import { AppBar, Toolbar, Grid, Typography, Button, createTheme} from '@mui/material'
+import { Nav, Navbar, Container} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { Button, Stack } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
-import Logo from "../images/Logo.png";
 import '../style/Header.css';
-
-const appTheme = createTheme ({
-    palette: {
-        type: 'light',
-        primary: {
-            main: '#7c4dff',
-        },
-        secondary: {
-            main: '#ff8a65',
-        },
-    },
-});
+import { appTheme } from './Theme.js'
 
 export class Header extends Component {
-    static displayName = Header.name;
-
     constructor(props) {
         super(props);
+
+        this.toggleNavbar = this.toggleNavbar.bind(this);
+        this.state = {
+            collapsed: true
+        };
+    }
+
+    toggleNavbar() {
+        this.setState({
+            collapsed: !this.state.collapsed
+        });
     }
 
     render() {
         return (
             <header>
                 <ThemeProvider theme={appTheme}>
-                    <AppBar position="static" className="app-bar">
-                        <Toolbar>
-                            <Grid container spacing={5}>
-                                <Grid item xs={2}>
-                                    <Link to="/">
-                                        <img src={Logo} className='logo-image' />
-                                    </Link>
-                                </Grid>
-                                <Grid item xs={1}>
-                                    <Link to="/">
-                                        <Typography variant="h6" component="div" className="path">
-                                            Home
-                                        </Typography>
-                                    </Link>
-                                </Grid>
-                                <Grid item xs={1}>
-                                    <Link to="/counter">
-                                        <Typography variant="h6" component="div" className="path">
-                                            About
-                                        </Typography>
-                                    </Link>
-                                </Grid>
-                                <Grid item xs={2}>
-                                    <Link to="/fetch-data">
-                                        <Typography variant="h6" component="div" className="path">
-                                            Search Pets
-                                        </Typography>
-                                    </Link>
-                                </Grid>
-                                <Grid item xs={1}>
-                                    <Link to="/counter">
-                                        <Typography variant="h6" component="div" className="path">
-                                            Contact
-                                        </Typography>
-                                    </Link>
-                                </Grid>
-                                <Grid item xs={2}>
-                                    <Link to="/fetch-data">
-                                        <Typography variant="h6" component="div" className="path">
-                                            FAQ
-                                        </Typography>
-                                    </Link>
-                                </Grid>
-                                <Grid item xs={3} className="sign-in-buttons">
-                                    <Button color="inherit" >Login</Button>
-                                    <Button color="inherit" >Sign Up</Button>
-                                </Grid>
-                            </Grid>
-                        </Toolbar>
-                    </AppBar>
+                    <Navbar collapseOnSelect expand="lg" className="color-nav" variant="dark">
+                        <Container>
+                            <Navbar.Brand href="#home">No Paws Left Behind</Navbar.Brand>
+                            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                            <Navbar.Collapse id="responsive-navbar-nav">
+                                <Nav className="me-auto">
+                                    <Nav.Link to="/">Home</Nav.Link>
+                                    <Nav.Link to="/counter">About</Nav.Link>
+                                    <Nav.Link to="/fetch-data">Pet Search</Nav.Link>
+                                    <Nav.Link to="/counter">Contact</Nav.Link>
+                                    <Nav.Link to="/fetch-data">FAQ</Nav.Link>
+                                </Nav>
+                                <Nav>
+                                    <Button color="secondary" >Login</Button>
+                                    <Button color="secondary" >Sign Up</Button>
+                                </Nav>
+                            </Navbar.Collapse>
+                        </Container>
+                    </Navbar>
                 </ThemeProvider>
             </header>
         );

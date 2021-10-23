@@ -1,21 +1,56 @@
-﻿.mainDiv {
-    height: 100%;
-    width: 100%;
+﻿#mainDiv {
+    width: 111%;
+    padding: 5vh 0;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+#img-paper {
+    height: 72vh;
+    max-width: 45vh;
+    align-content: center;
+    justify-content: center;
+}
+
+#pup-img {
+    height: 70vh;
+    margin: 1vh;
+    background: #fff;
+    border-right: 0;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.06);
+    align-content: center;
+}
+
+#sign-up {
+    margin-bottom: 1vh;
+}
+
+.landing-text {
+    line-height: 4vh;
+    margin: 10vh 2vh;
+    align-content: center;
+}
+
+h2 {
+    font-family: "Raleway", sans-serif;
+    position: relative;
+    margin-bottom: 1vh;
+    padding-bottom: 1vh;
+    text-align: center;
+}
+
+p {
     margin: 5vh;
 }
 
-.logo {
-    justify-content: center;
-    align-content: center;
+body,
+html {
+    font-family: "Open Sans", sans-serif;
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+    color: #777;
+    font-weight: 400;
+    width: 100% !important;
+    height: 100% !important;
 }
-
-.summary {
-    margin: 10vh;
-}
-
-.paper {
-    height: 100%;
-    width: 100%;
-    align-content: center;
-}
-

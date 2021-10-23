@@ -1,46 +1,22 @@
 ﻿import React, { Component } from 'react';
-import { AppBar, Paper, Toolbar, Typography } from '@mui/material'
+import { Divider, Grid, Stack, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
+import '../style/Footer.css';
 
-export class Home extends Component {
+export class Footer extends Component {
     render() {
         return (
-            <div>
-                <AppBar position="fixed" color="inherit" sx={{ top: 'auto', bottom: 0 }}>
-                    <Toolbar>
-                        <Grid container spacing={6}>
-                            <Grid item xs={2} />
-                            <Grid item xs={2}>
-                                <Link to="/">
-                                    <Typography variant="p" component="div" className="path">
-                                        Address
-                                    </Typography>
-                                </Link>
-                            </Grid>
-                            <Grid item xs={1}>
-                                |
-                            </Grid>
-                            <Grid item xs={2}>
-                                <Link to="/counter">
-                                    <Typography variant="p" component="div" className="path">
-                                        Operating Hours
-                                    </Typography>
-                                </Link>
-                            </Grid>
-                            <Grid item xs={1}>
-                                |
-                            </Grid>
-                            <Grid item xs={2}>
-                                <Link to="/fetch-data">
-                                    <Typography variant="p" component="div" className="path">
-                                        FAQ
-                                    </Typography>
-                                </Link>
-                            </Grid>
-                            <Grid item xs={2} />
+            <footer>
+                <Stack orientation="vertical" sx={{ top: "auto", bottom: 0 }}>
+                    <Grid container alignItems="center" justifyContent="center">
+                        <Grid item xs={12} textAlign="center">
+                            <Typography>
+                                No Paws Left Behind <Divider/> Copyright&copy; {new Date().getFullYear()}.
+                            </Typography>
                         </Grid>
-                    </Toolbar>
-                </AppBar>
-            </div>
+                    </Grid>
+                </Stack>
+            </footer>
         );
     }
 }
