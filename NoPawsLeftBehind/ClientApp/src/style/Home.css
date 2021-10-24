@@ -36,6 +36,7 @@
     line-height: 4vh;
     text-align: center;
     min-width: 360px;
+    align-items: center;
 }
 
 h2 {

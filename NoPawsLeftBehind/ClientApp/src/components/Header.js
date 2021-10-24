@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { Nav, Navbar, Container} from 'react-bootstrap';
-import { Button, Stack } from '@mui/material';
+import { Button } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import '../style/Header.css';
 import { appTheme } from './Theme.js'

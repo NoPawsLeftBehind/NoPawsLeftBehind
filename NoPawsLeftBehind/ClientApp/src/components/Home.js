@@ -11,13 +11,13 @@ export class Home extends Component {
         return (
             <ThemeProvider theme={appTheme}>
                 <div id="mainDiv">
-                    <Grid container spacing={3} justify="space-evenly" style={{ flexGrow: 1 }}>
+                    <Grid container spacing={3} justify="space-evenly" alignItems="center" style={{ flexGrow: 1 }}>
                         <Grid item xs={12} sm={6} justify="center">
                             <Paper elevation={3} id="img-paper">
                                     <img src={Pup} id="pup-img" alt="" />
                             </Paper>
                         </Grid>
-                        <Grid item xs={12} sm={6} className="landing-text" justify="center">
+                        <Grid item xs={12} sm={6} className="landing-text">
                             <h2>Save a pet. Be a superhero!</h2>
                             <Divider />
                             <p>
