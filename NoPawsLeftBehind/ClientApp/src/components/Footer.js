@@ -1,6 +1,5 @@
 ﻿import React, { Component } from 'react';
-import { Divider, Grid, Stack, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Grid, Stack, Typography } from '@mui/material';
 import '../style/Footer.css';
 
 export class Footer extends Component {

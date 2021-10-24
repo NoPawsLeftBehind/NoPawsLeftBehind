@@ -7,8 +7,7 @@ export const appTheme = createTheme({
             main: '#311b92',
         },
         secondary: {
-            main: 'rgba(255,145,0,0.66)',
-            dark: '#ffe0b2',
+            main: '#ffffff',
         },
     },
 });
