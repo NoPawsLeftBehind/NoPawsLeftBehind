@@ -30,12 +30,12 @@ export class Header extends Component {
                             <Navbar.Brand href="#home">No Paws Left Behind</Navbar.Brand>
                             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                             <Navbar.Collapse id="responsive-navbar-nav">
-                                <Nav className="me-auto" mr-4>
-                                    <Nav.Link href="/">Home</Nav.Link>
-                                    <Nav.Link href="/counter">About</Nav.Link>
-                                    <Nav.Link href="/fetch-data">Pet Search</Nav.Link>
-                                    <Nav.Link href="/counter">Contact</Nav.Link>
-                                    <Nav.Link href="/fetch-data">FAQ</Nav.Link>
+                                <Nav className="me-auto">
+                                    <Nav.Link className="mx-4" href="/">Home</Nav.Link>
+                                    <Nav.Link className="mx-4" href="/counter">About</Nav.Link>
+                                    <Nav.Link className="mx-4" href="/fetch-data">Pet Search</Nav.Link>
+                                    <Nav.Link className="mx-4" href="/counter">Contact</Nav.Link>
+                                    <Nav.Link className="mx-4" href="/fetch-data">FAQ</Nav.Link>
                                 </Nav>
                                 <Nav>
                                     <Button color="secondary">Login</Button>
