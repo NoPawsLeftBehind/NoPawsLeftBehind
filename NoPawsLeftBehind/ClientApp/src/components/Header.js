@@ -4,6 +4,7 @@ import { Button } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import '../style/Header.css';
 import { appTheme } from './Theme.js'
+import PetsIcon from '@mui/icons-material/Pets';
 
 export class Header extends Component {
     constructor(props) {
@@ -26,7 +27,8 @@ export class Header extends Component {
             <header>
                 <ThemeProvider theme={appTheme}>
                     <Navbar collapseOnSelect expand="lg" className="color-nav" variant="dark">
-                        <Container>
+                        <Container >
+                            <PetsIcon sx={{ color: 'white', mr: 1, mb: 1}} />
                             <Navbar.Brand href="#home">No Paws Left Behind</Navbar.Brand>
                             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                             <Navbar.Collapse id="responsive-navbar-nav">
