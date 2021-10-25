@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MySqlConnector;
+using NoPawsLeftBehind.Database;
 
 namespace NoPawsLeftBehind
 {
@@ -31,7 +32,7 @@ namespace NoPawsLeftBehind
             });
 
             // database connection
-            services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration["ConnectionStrings:Default"]));
+            services.AddTransient<AppDb>(_ => new AppDb(Configuration["ConnectionStrings:Default"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

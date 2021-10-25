@@ -5,14 +5,15 @@ using System.Data;
 using System.Threading.Tasks;
 using MySqlConnector;
 using System.Data.Common;
+using NoPawsLeftBehind.Database;
 
 namespace NoPawsLeftBehind.Models
 {
     public class AnimalQuery
     {
-        public MySqlConnection Db { get; }
+        internal AppDb Db { get; }
 
-        public AnimalQuery(MySqlConnection db)
+        public AnimalQuery(AppDb db)
         {
             Db = db;
         }
@@ -20,7 +21,9 @@ namespace NoPawsLeftBehind.Models
         public async Task<List<Animal>> AllAnimalsAsync()
         {
 
-            using var cmd = new MySqlCommand("Select animalID, name, typeID, breedID, genderID FROM Animals");
+            using var cmd = Db.Connection.CreateCommand();
+            cmd.CommandText = @"Select animalID, name, typeID, breedID, genderID FROM Animals;";
+
             return await ReadAllAsync(await cmd.ExecuteReaderAsync());
         }
 
