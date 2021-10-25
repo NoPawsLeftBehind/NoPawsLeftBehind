@@ -17,9 +17,8 @@ namespace NoPawsLeftBehind.Models
             Db = db;
         }
 
-        public async Task<List<Animal>> LatestPostsAsync()
+        public async Task<List<Animal>> AllAnimalsAsync()
         {
-            await Db.OpenAsync();
 
             using var cmd = new MySqlCommand("Select animalID, name, typeID, breedID, genderID FROM Animals");
             return await ReadAllAsync(await cmd.ExecuteReaderAsync());
