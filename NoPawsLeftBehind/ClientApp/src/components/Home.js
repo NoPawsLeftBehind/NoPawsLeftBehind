@@ -33,7 +33,7 @@ export class Home extends Component {
                         </Grid>
                     </Grid>
                 </div>
-                <Footer />
+
             </ThemeProvider>
         );
     }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container } from 'reactstrap';
 import { Header } from './Header';
+import { Footer } from './Footer.js';
 
 export class Layout extends Component {
   static displayName = Layout.name;
@@ -11,7 +12,8 @@ export class Layout extends Component {
         <Header />
         <Container>
           {this.props.children}
-        </Container>
+            </Container>
+        <Footer />
       </div>
     );
   }
