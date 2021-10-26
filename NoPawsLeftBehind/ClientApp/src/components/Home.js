@@ -1,26 +1,40 @@
 import React, { Component } from 'react';
+import { Paper, Divider, Button, Stack, Grid } from '@mui/material'
+import { ThemeProvider } from '@mui/material/styles';
+import { Footer } from './Footer.js';
+import Pup from "../images/pup-flower.jpg";
+import '../style/Home.css';
+import { appTheme } from './Theme.js'
 
 export class Home extends Component {
-  static displayName = Home.name;
+    render() {
+        return (
+            <ThemeProvider theme={appTheme}>
+                <div id="mainDiv">
+                    <Grid container spacing={3} justify="space-evenly" alignItems="center" style={{ flexGrow: 1 }}>
+                        <Grid item xs={12} sm={6} justify="center">
+                            <Paper elevation={3} id="img-paper">
+                                    <img src={Pup} id="pup-img" alt="" />
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={12} sm={6} className="landing-text">
+                            <h2>Save a pet. Be a superhero!</h2>
+                            <Divider />
+                            <p>
+                                Every year, millions of pets remain in shelters while potential owners search unable to find
+                                a perfect pet match. No Paws Left Behind allows shelters to post profiles for pets available for adoption
+                                so that future pet owners can browse and find their perfect pet. Help a pet find their forever home.
+                                Sign up today!
+                            </p>
+                            <Stack>
+                                <Button variant="contained" id="sign-up">Sign Up</Button>
+                                <Button variant="outlined" id="login">Login</Button>
+                            </Stack>
+                        </Grid>
+                    </Grid>
+                </div>
 
-  render () {
-    return (
-      <div>
-        <h1>Home Page for No Paws Left Behind!</h1>
-        <p>Welcome to your new single-page application, built with:</p>
-        <ul>
-          <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-          <li><a href='https://facebook.github.io/react/'>React</a> for client-side code</li>
-          <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-        </ul>
-        <p>To help you get started, we have also set up:</p>
-        <ul>
-          <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-          <li><strong>Development server integration</strong>. In development mode, the development server from <code>create-react-app</code> runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-          <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration produces minified, efficiently bundled JavaScript files.</li>
-        </ul>
-        <p>The <code>ClientApp</code> subdirectory is a standard React application based on the <code>create-react-app</code> template. If you open a command prompt in that directory, you can run <code>npm</code> commands such as <code>npm test</code> or <code>npm install</code>.</p>
-      </div>
-    );
-  }
+            </ThemeProvider>
+        );
+    }
 }
