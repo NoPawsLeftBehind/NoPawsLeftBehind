@@ -2,7 +2,6 @@
 
 export const appTheme = createTheme({
     palette: {
-        type: 'light',
         primary: {
             main: '#4a148c',
         },

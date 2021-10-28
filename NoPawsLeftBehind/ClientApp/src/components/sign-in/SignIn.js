@@ -11,9 +11,9 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import PetsIcon from "@mui/icons-material/Pets";
+import { appTheme } from '../Theme';
 
 
-const theme = createTheme();
 
 export default function SignIn() {
     const handleSubmit = (event) => {
@@ -27,7 +27,7 @@ export default function SignIn() {
     };
 
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={appTheme}>
             <Grid
                 component="main"
                 maxWidth="xs"
@@ -50,7 +50,7 @@ export default function SignIn() {
                         boxShadow: 3
                     }}
                 >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                    <Avatar sx={{ m: 1, bgcolor: '#4a148c' }}>
                         <PetsIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
@@ -84,7 +84,7 @@ export default function SignIn() {
                         <Button
                             type="submit"
                             fullWidth
-                            color="secondary"
+                            color="primary"
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
@@ -92,7 +92,7 @@ export default function SignIn() {
             </Button>
                         <Grid container justifyContent="center">
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <Link href="/register" variant="body2">
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>

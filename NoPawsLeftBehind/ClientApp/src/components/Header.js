@@ -5,6 +5,8 @@ import { ThemeProvider } from '@mui/material/styles';
 import '../style/Header.css';
 import { appTheme } from './Theme.js'
 import PetsIcon from '@mui/icons-material/Pets';
+import { Link } from 'react-router-dom';
+
 
 export class Header extends Component {
     constructor(props) {
@@ -40,8 +42,9 @@ export class Header extends Component {
                                     <Nav.Link className="mx-4" href="/fetch-data">FAQ</Nav.Link>
                                 </Nav>
                                 <Nav>
-                                    <Button color="secondary">Login</Button>
-                                    <Button color="secondary">Sign Up</Button>
+
+                                    <Button component={Link} to="/sign-in" color="secondary">Login</Button>
+                                    <Button component={Link} to="/register"color="secondary">Sign Up</Button>
                                 </Nav>
                             </Navbar.Collapse>
                         </Container>
