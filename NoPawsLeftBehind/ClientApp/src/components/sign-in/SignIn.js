@@ -12,8 +12,16 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import PetsIcon from "@mui/icons-material/Pets";
 import { appTheme } from '../Theme';
+import axios from 'axios'
 
 
+
+const onTermSubmit = async () => {
+    const article = { title: 'React POST Request Example' };
+    const response = await axios.post('https://reqres.in/api/articles', article);
+    console.log(response.data.id)
+    console.log('howdy')
+};
 
 export default function SignIn() {
     const handleSubmit = (event) => {
@@ -24,6 +32,8 @@ export default function SignIn() {
             email: data.get('email'),
             password: data.get('password'),
         });
+
+        console.log(onTermSubmit())
     };
 
     return (
