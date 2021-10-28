@@ -21,55 +21,63 @@ namespace NoPawsLeftBehind.Queries
 
         public AppDb Db { get; }
 
-        public async Task<IReadOnlyList<User>> ReadAllAsync(DbDataReader reader)
+        public async Task<IEnumerable<User>> ReadAllAsync()
         {
             List<User> userList = new List<User>();
 
             using MySqlCommand cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"SELECT * FROM `Users`;";
+            cmd.CommandText = @"SELECT `userId`, `email`, `password`, `firstName`, `lastName`, `roleId` FROM `Users`;";
 
+            MySqlDataReader reader = await cmd.ExecuteReaderAsync();
             using (reader)
             {
                 while (await reader.ReadAsync())
                 {
                     User user = new User();
-                    user.Id = reader.GetInt32(0).ToString();
+                    user.userID = reader.GetInt32(0).ToString();
                     user.Email = reader.GetString(1);
                     user.Password = reader.GetString(2);
+                    user.FirstName = reader.GetString(3);
+                    user.LastName = reader.GetString(4);
+                    user.RoleId = reader.GetInt32(5).ToString();
 
                     userList.Add(user);
                 };
             }
 
-            return userList.AsReadOnly();
+            return userList;
         }
 
-        public async Task<User> ReadOneAsync(DbDataReader reader, string sUsername, string sPassword)
+        public async Task<User> ReadOneAsync(string sEmail, string sPassword)
         {
-            List<User> userList = null;
+            List<User> userList = new List<User>();
 
             using MySqlCommand cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"SELECT * FROM `Users` WHERE `username`=@username AND `password`=password;";
+            cmd.CommandText = @"SELECT `userId`, `email`, `firstName`, `lastName`, `roleId` FROM `Users` WHERE `email`=@email AND `password`=@password;";
 
-            MySqlParameter parameters = new MySqlParameter();
+            ApiHelper apiHelper = new ApiHelper();
+            apiHelper.BindStringParam(cmd, Tuple.Create("@email", sEmail));
+            apiHelper.BindStringParam(cmd, Tuple.Create("@password", sPassword));
 
+            await cmd.ExecuteNonQueryAsync();
 
-            cmd.Parameters.Add("Lindsey");
-
+            MySqlDataReader reader = await cmd.ExecuteReaderAsync();
             using (reader)
             {
                 while (await reader.ReadAsync())
                 {
                     User user = new User();
-                    user.Id = reader.GetInt32(0).ToString();
+                    user.userID = reader.GetInt32(0).ToString();
                     user.Email = reader.GetString(1);
-                    user.Password = reader.GetString(2);
+                    user.FirstName = reader.GetString(2);
+                    user.LastName = reader.GetString(3);
+                    user.RoleId = reader.GetInt32(4).ToString();
 
                     userList.Add(user);
                 };
             }
 
-            if (userList.Count <= 0)
+            if (userList.Count == 0)
                 return null;
 
             return userList[0];
@@ -90,7 +98,7 @@ namespace NoPawsLeftBehind.Queries
 
             await cmd.ExecuteNonQueryAsync();
 
-            user.Id = cmd.LastInsertedId.ToString();
+            user.userID = cmd.LastInsertedId.ToString();
         }
     }
 }
