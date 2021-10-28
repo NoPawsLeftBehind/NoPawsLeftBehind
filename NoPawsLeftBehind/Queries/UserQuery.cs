@@ -35,11 +35,11 @@ namespace NoPawsLeftBehind.Queries
                 {
                     User user = new User();
                     user.userID = reader.GetInt32(0).ToString();
-                    user.Email = reader.GetString(1);
-                    user.Password = reader.GetString(2);
-                    user.FirstName = reader.GetString(3);
-                    user.LastName = reader.GetString(4);
-                    user.RoleId = reader.GetInt32(5).ToString();
+                    user.email = reader.GetString(1);
+                    user.password = reader.GetString(2);
+                    user.firstName = reader.GetString(3);
+                    user.lastName = reader.GetString(4);
+                    user.roleId = reader.GetInt32(5).ToString();
 
                     userList.Add(user);
                 };
@@ -53,7 +53,7 @@ namespace NoPawsLeftBehind.Queries
             List<User> userList = new List<User>();
 
             using MySqlCommand cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"SELECT `userId`, `email`, `firstName`, `lastName`, `roleId` FROM `Users` WHERE `email`=@email AND `password`=@password;";
+            cmd.CommandText = @"SELECT `userId`, `email`, `firstName`, `lastName`, `roleId` FROM `Users` WHERE `email` = @email AND `password` = @password;";
 
             ApiHelper apiHelper = new ApiHelper();
             apiHelper.BindStringParam(cmd, Tuple.Create("@email", sEmail));
@@ -68,10 +68,10 @@ namespace NoPawsLeftBehind.Queries
                 {
                     User user = new User();
                     user.userID = reader.GetInt32(0).ToString();
-                    user.Email = reader.GetString(1);
-                    user.FirstName = reader.GetString(2);
-                    user.LastName = reader.GetString(3);
-                    user.RoleId = reader.GetInt32(4).ToString();
+                    user.email = reader.GetString(1);
+                    user.firstName = reader.GetString(2);
+                    user.lastName = reader.GetString(3);
+                    user.roleId = reader.GetInt32(4).ToString();
 
                     userList.Add(user);
                 };
@@ -90,11 +90,11 @@ namespace NoPawsLeftBehind.Queries
                 "(@email, @password, @firstname, @lastname, @roleid);";
 
             ApiHelper apiHelper = new ApiHelper();
-            apiHelper.BindStringParam(cmd, Tuple.Create("@email", user.Email));
-            apiHelper.BindStringParam(cmd, Tuple.Create("@password", user.Password));
-            apiHelper.BindStringParam(cmd, Tuple.Create("@firstname", user.FirstName));
-            apiHelper.BindStringParam(cmd, Tuple.Create("@lastname", user.LastName));
-            apiHelper.BindIntParam(cmd, Tuple.Create("@roleid", Int32.Parse(user.RoleId)));
+            apiHelper.BindStringParam(cmd, Tuple.Create("@email", user.email));
+            apiHelper.BindStringParam(cmd, Tuple.Create("@password", user.password));
+            apiHelper.BindStringParam(cmd, Tuple.Create("@firstname", user.firstName));
+            apiHelper.BindStringParam(cmd, Tuple.Create("@lastname", user.lastName));
+            apiHelper.BindIntParam(cmd, Tuple.Create("@roleid", Int32.Parse(user.roleId)));
 
             await cmd.ExecuteNonQueryAsync();
 
