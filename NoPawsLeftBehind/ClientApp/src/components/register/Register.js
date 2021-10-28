@@ -17,16 +17,7 @@ import { appTheme } from '../Theme';
 import axios from "axios";
 
 
-const sendGetRequest = async () => {
-    const article = { title: 'React POST Request Example' };
-    const response = await axios.post('https://reqres.in/api/articles', article);
-};
 
-const postRequest = async () => {
-    const login = {Email: 'luis@email.com', Password: 'password'};
-    const response = await axios.post('api/Users/login', login);
-    console.log(response.data)
-};
 
 export default function Register() {
     const handleSubmit = (event) => {
@@ -37,7 +28,7 @@ export default function Register() {
             email: data.get("email"),
             password: data.get("password")
         });
-        console.log(postRequest())
+
     };
 
     return (

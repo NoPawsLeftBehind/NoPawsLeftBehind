@@ -16,11 +16,15 @@ import axios from 'axios'
 
 
 
-const onTermSubmit = async () => {
+const sendGetRequest = async () => {
     const article = { title: 'React POST Request Example' };
     const response = await axios.post('https://reqres.in/api/articles', article);
-    console.log(response.data.id)
-    console.log('howdy')
+};
+
+const postRequest = async () => {
+    const login = { Email: 'luis@email.com', Password: 'password' };
+    const response = await axios.post('api/User/login', login);
+    console.log(response.data)
 };
 
 export default function SignIn() {
@@ -33,7 +37,7 @@ export default function SignIn() {
             password: data.get('password'),
         });
 
-        console.log(onTermSubmit())
+        console.log(postRequest())
     };
 
     return (
