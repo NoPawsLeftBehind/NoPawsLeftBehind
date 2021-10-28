@@ -20,6 +20,25 @@ namespace NoPawsLeftBehind.Controllers
 
         public AppDb Db { get; }
 
+        // TODO: REMOVE AFTER TESTING COMPLETE
+        [HttpGet]
+        public async Task<IEnumerable<User>> ReadAllAsync()
+        {
+            await Db.Connection.OpenAsync();
+
+            UserQuery userQuery = new UserQuery(Db);
+            try
+            {
+                return await userQuery.ReadAllAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return null;
+            }
+        }
+
+        // api/Users/signup
         [HttpPost("signup")]
         public async Task<IActionResult> SignUp([FromBody]User user)
         {
@@ -35,6 +54,24 @@ namespace NoPawsLeftBehind.Controllers
             catch(Exception ex)
             {
                 return new ObjectResult(ex);
+            }
+        }
+
+        // api/Users/login
+        [HttpPost("login")]
+        public async Task<User> Login([FromBody]Login login)
+        {
+            await Db.Connection.OpenAsync();
+
+            UserQuery userQuery = new UserQuery(Db);
+            try
+            {
+                return await userQuery.ReadOneAsync(login.Email, login.Password);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return null;
             }
         }
     }
