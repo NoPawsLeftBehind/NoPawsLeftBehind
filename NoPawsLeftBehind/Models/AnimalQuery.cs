@@ -57,9 +57,17 @@ namespace NoPawsLeftBehind.Models
                     {
                         Id = reader.GetInt32(0),
                         Name = reader.GetString(1),
-                        Type = reader.GetString(2),
-                        Breed = reader.GetString(3),
-                        Gender = reader.GetString(4)
+                        Picture = reader.GetString(2),
+                        Type = reader.GetString(3),
+                        Breed = reader.GetString(4),
+                        Gender = reader.GetString(5),
+                        Availability = reader.GetString(6),
+                        Age = reader.GetInt32(7),
+                        Weight = reader.GetInt32(8),
+                        Color = reader.GetString(9),
+                        Description = reader.GetString(10),
+                        News = reader.GetString(11),
+                        DateCreated = reader.GetDateTime(12)
                     };
                     animals.Add(animal);
                 }
