@@ -53,7 +53,7 @@ namespace NoPawsLeftBehind.Models
             {
                 while (await reader.ReadAsync())
                 {
-                    var animal = new Animal()
+                    var animal = new Animal(Db)
                     {
                         Id = reader.GetInt32(0),
                         Name = reader.GetString(1),
