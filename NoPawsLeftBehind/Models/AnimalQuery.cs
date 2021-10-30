@@ -24,7 +24,7 @@ namespace NoPawsLeftBehind.Models
             using var cmd = Db.Connection.CreateCommand();
             cmd.CommandText = @"SELECT 	a.animalID, 
 		                                a.name,
-                                        a.picture,
+                                        IFNULL(a.picture, '') as picture,
 		                                t.typeName, 
                                         b.breedName, 
                                         g.gender,
