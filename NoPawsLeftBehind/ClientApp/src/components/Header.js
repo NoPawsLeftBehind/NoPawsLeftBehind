@@ -43,8 +43,8 @@ export class Header extends Component {
                                     <Nav.Link className="mx-4" href="/fetch-data">FAQ</Nav.Link>
                                 </Nav>
                                 <Nav>
+                                    <SignupButton />
                                     <LoginButton />
-                                    <SignupButton/>
                                     <LogoutButton/>
                                 </Nav>
                             </Navbar.Collapse>
