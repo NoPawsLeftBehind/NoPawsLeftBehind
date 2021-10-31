@@ -5,55 +5,72 @@ export class FetchData extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { forecasts: [], loading: true };
+    this.state = { animals: [], loading: true };
   }
 
   componentDidMount() {
-    this.populateWeatherData();
+    this.populateAnimalsData();
   }
 
-  static renderForecastsTable(forecasts) {
+  static renderAnimalsTable(animals) {
     return (
       <table className='table table-striped' aria-labelledby="tabelLabel">
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
+            <th>Name</th>
+            <th>Picture</th>
+            <th>Animal Type</th>
+            <th>Breed</th>
+            <th>Gender</th>
+            <th>Availability</th>
+            <th>Age</th>
+            <th>Weight</th>
+            <th>Color</th>
+            <th>Description</th>
+            <th>News</th>
+            <th>Date Acquired</th>
           </tr>
         </thead>
         <tbody>
-          {forecasts.map(forecast =>
-            <tr key={forecast.date}>
-              <td>{forecast.date}</td>
-              <td>{forecast.temperatureC}</td>
-              <td>{forecast.temperatureF}</td>
-              <td>{forecast.summary}</td>
+          {animals.map(animal =>
+            <tr key={animal.id}>
+                  <td>{animal.name}</td>
+                  <td>{animal.picture}</td>
+                  <td>{animal.type}</td>
+                  <td>{animal.breed}</td>
+                  <td>{animal.gender}</td>
+                  <td>{animal.availability}</td>
+                  <td>{animal.age}</td>
+                  <td>{animal.weight}</td>
+                  <td>{animal.color}</td>
+                  <td>{animal.description}</td>
+                  <td>{animal.news}</td>
+                  <td>{animal.datecreated}</td>
             </tr>
           )}
         </tbody>
-      </table>
+        </table>
+        
     );
   }
 
   render() {
     let contents = this.state.loading
       ? <p><em>Loading...</em></p>
-      : FetchData.renderForecastsTable(this.state.forecasts);
+      : FetchData.renderAnimalsTable(this.state.animals);
 
     return (
       <div>
-        <h1 id="tabelLabel" >Weather forecast</h1>
+        <h1 id="tabelLabel" >Our Animals</h1>
         <p>This component demonstrates fetching data from the server.</p>
         {contents}
       </div>
     );
   }
 
-  async populateWeatherData() {
-    const response = await fetch('weatherforecast');
+  async populateAnimalsData() {
+    const response = await fetch('api/animals');
     const data = await response.json();
-    this.setState({ forecasts: data, loading: false });
+    this.setState({ animals: data, loading: false });
   }
 }
