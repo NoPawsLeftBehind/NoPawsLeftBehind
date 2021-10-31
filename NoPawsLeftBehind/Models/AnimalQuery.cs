@@ -22,7 +22,25 @@ namespace NoPawsLeftBehind.Models
         {
 
             using var cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"Select animalID, name, typeID, breedID, genderID FROM Animals;";
+            cmd.CommandText = @"SELECT 	a.animalID, 
+		                                a.name,
+                                        IFNULL(a.picture, '') as picture,
+		                                t.typeName, 
+                                        b.breedName, 
+                                        g.gender,
+                                        av.availability,
+                                        age,
+                                        weight,
+                                        c.color,
+                                        description,
+                                        news,
+                                        dateCreated
+                                FROM Animals a
+                                LEFT JOIN AnimalTypes t ON a.typeID = t.typeID
+                                LEFT JOIN Breeds b ON a.breedID = b.breedID
+                                LEFT JOIN Genders g ON a.genderID = g.genderID
+                                LEFT JOIN Availability av on a.availabilityID = av.availabilityID
+                                LEFT JOIN Colors c on a.colorID = c.colorID;";
 
             return await ReadAllAsync(await cmd.ExecuteReaderAsync());
         }
@@ -35,13 +53,21 @@ namespace NoPawsLeftBehind.Models
             {
                 while (await reader.ReadAsync())
                 {
-                    var animal = new Animal()
+                    var animal = new Animal(Db)
                     {
                         Id = reader.GetInt32(0),
                         Name = reader.GetString(1),
-                        Type = reader.GetString(2),
-                        Breed = reader.GetString(3),
-                        Gender = reader.GetString(4)
+                        Picture = reader.GetString(2),
+                        Type = reader.GetString(3),
+                        Breed = reader.GetString(4),
+                        Gender = reader.GetString(5),
+                        Availability = reader.GetString(6),
+                        Age = reader.GetInt32(7),
+                        Weight = reader.GetInt32(8),
+                        Color = reader.GetString(9),
+                        Description = reader.GetString(10),
+                        News = reader.GetString(11),
+                        DateCreated = reader.GetDateTime(12)
                     };
                     animals.Add(animal);
                 }

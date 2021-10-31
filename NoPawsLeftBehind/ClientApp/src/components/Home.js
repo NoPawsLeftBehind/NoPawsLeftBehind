@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Paper, Divider, Button, Stack, Grid } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles';
-import { Footer } from './Footer.js';
 import Pup from "../images/pup-flower.jpg";
 import '../style/Home.css';
 import { appTheme } from './Theme.js'
