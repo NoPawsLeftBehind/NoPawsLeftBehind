@@ -27,6 +27,12 @@ const postRequest = async () => {
     console.log(response.data)
 };
 
+const getRequest = async () => {
+    const login = { Email: 'luis@email.com', Password: 'password' };
+    const response = await axios.get('api/User');
+    console.log(response.data)
+};
+
 export default function SignIn() {
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -37,7 +43,7 @@ export default function SignIn() {
             password: data.get('password'),
         });
 
-        console.log(postRequest())
+        console.log(getRequest())
     };
 
     return (
