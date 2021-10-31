@@ -4,10 +4,11 @@ import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
-import { SearchPets } from './components/SearchPets';
+import FilterPets from './components/FilterPets';
 import './custom.css'
 import SignIn from './components/sign-in/SignIn';
 import Register from './components/register/Register';
+import CardList from './components/CardList';
 
 
 export default class App extends Component {
@@ -18,7 +19,7 @@ export default class App extends Component {
       <Layout>
         <Route exact path='/' component={Home} />
         <Route path='/counter' component={Counter} />
-            <Route path='/fetch-data' component={SearchPets} />
+            <Route path='/fetch-data' component={FilterPets} />
             <Route path='/sign-in' component={SignIn} />
             <Route path='/register' component={Register} />
       </Layout>

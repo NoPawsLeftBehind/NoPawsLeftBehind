@@ -1,20 +1,34 @@
 ﻿import * as React from "react";
+import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
+import CssBaseline from "@mui/material/CssBaseline";
 import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import CardsList from "./CardsList";
+import CardList from "./CardList";
 
 const drawerWidth = 240;
 
-function SearchPets(props) {
+export default function FilterPets(props) {
+    const { window } = props;
+    const [mobileOpen, setMobileOpen] = React.useState(false);
+
+    const handleDrawerToggle = () => {
+        setMobileOpen(!mobileOpen);
+    };
 
     const drawer = (
-        <div>
-            <Stack spacing={4} p={2} mt={3}>
+        <div m={100}>
+            <Toolbar />
+
+            <Stack spacing={4} p={2}>
                 <FormControl>
                     <InputLabel variant="standard" htmlFor="uncontrolled-native">
                         Type
@@ -50,24 +64,24 @@ function SearchPets(props) {
 
                 <FormControl fullWidth>
                     <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                        Age
+                        Size
           </InputLabel>
                     <NativeSelect
                         defaultValue={30}
                         inputProps={{
-                            name: "age",
+                            name: "size",
                             id: "uncontrolled-native"
                         }}
                     >
-                        <option value={10}>Ten</option>
-                        <option value={20}>Twenty</option>
-                        <option value={30}>Thirty</option>
+                        <option value={10}>Small</option>
+                        <option value={20}>Medium</option>
+                        <option value={30}>Large</option>
                     </NativeSelect>
                 </FormControl>
 
                 <FormControl fullWidth>
                     <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                        Age
+                        Gender
           </InputLabel>
                     <NativeSelect
                         defaultValue={30}
@@ -76,9 +90,9 @@ function SearchPets(props) {
                             id: "uncontrolled-native"
                         }}
                     >
-                        <option value={10}>Ten</option>
-                        <option value={20}>Twenty</option>
-                        <option value={30}>Thirty</option>
+                        <option value={10}>Male</option>
+                        <option value={20}>Female</option>
+                        <option value={30}>Other</option>
                     </NativeSelect>
                 </FormControl>
                 <Button variant="contained">Search</Button>
@@ -86,16 +100,62 @@ function SearchPets(props) {
         </div>
     );
 
+    const container =
+        window !== undefined ? () => window().document.body : undefined;
+
     return (
-        <Box sx={{ display: "flex" }}>
-            <Box
+        <Box sx={{ display: "flex" }} mt={5}>
+            <CssBaseline />
+            <AppBar
+                position="fixed"
+                zIndex={1400}
+                sx={{
+            
+                    ml: { sm: `${drawerWidth}px` },
+                    mt: 7,
+                    
+                }}
+            >
+                <Toolbar>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        edge="start"
+                        onClick={handleDrawerToggle}
+                        sx={{ mr: 2, display: { sm: "none" } }}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography variant="h6" noWrap component="div">
+                        Pet Listing
+          </Typography>
+                </Toolbar>
+            </AppBar>
+            <Box mt={7}
                 component="nav"
                 sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
                 aria-label="mailbox folders"
             >
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-
-                <Drawer
+                <Drawer mt={7}
+                    container={container}
+                    variant="temporary"
+                    open={mobileOpen}
+                    onClose={handleDrawerToggle}
+                    ModalProps={{
+                        keepMounted: false // Better open performance on mobile.
+                    }}
+                    sx={{
+                        display: { xs: "block", sm: "none" },
+                        "& .MuiDrawer-paper": {
+                            boxSizing: "border-box",
+                            width: drawerWidth
+                        }
+                    }}
+                >
+                    {drawer}
+                </Drawer>
+                <Drawer m={7}
                     variant="permanent"
                     sx={{
                         display: { xs: "none", sm: "block" },
@@ -117,10 +177,11 @@ function SearchPets(props) {
                     width: { sm: `calc(100% - ${drawerWidth}px)` }
                 }}
             >
-                <CardsList />
+                {" "}
+                <Toolbar />
+                <CardList />
             </Box>
         </Box>
     );
 }
 
-export default SearchPets;
