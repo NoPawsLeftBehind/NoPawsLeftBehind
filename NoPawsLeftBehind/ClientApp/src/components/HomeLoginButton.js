@@ -2,7 +2,7 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { Button } from '@mui/material';
 
-const LoginButton = () => {
+const HomeLoginButton = () => {
     const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
 
     if (isLoading) {
@@ -11,11 +11,11 @@ const LoginButton = () => {
 
     return (
         !isAuthenticated && (
-            <Button color="secondary"
+            <Button variant="outlined" id='login'
                 onClick={() => loginWithRedirect()}>Login
             </Button>
         )
     );
 };
 
-export default LoginButton
+export default HomeLoginButton

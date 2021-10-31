@@ -3,12 +3,19 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Button } from '@mui/material';
 
 const LogoutButton = () => {
-    const { logout } = useAuth0();
+    const { isAuthenticated, isLoading, logout } = useAuth0();
+
+    if (isLoading) {
+        return <div>Loading ...</div>;
+    }
 
     return (
-        <Button onClick={() => logout({ returnTo: window.location.origin })}>
-            Log Out
-        </Button>
+        isAuthenticated && (
+            <Button color="secondary" id="logout"
+                onClick={() => logout({ returnTo: window.location.origin })}>
+                Log Out
+            </Button>
+        )
     );
 };
 
