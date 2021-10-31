@@ -45,7 +45,7 @@ export class FetchData extends Component {
                   <td>{animal.color}</td>
                   <td>{animal.description}</td>
                   <td>{animal.news}</td>
-                  <td>{animal.datecreated}</td>
+                  <td>{animal.dateCreated}</td>
             </tr>
           )}
         </tbody>
