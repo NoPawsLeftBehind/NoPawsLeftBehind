@@ -1,4 +1,4 @@
-﻿import React from "react";
+﻿import React, { useState } from "react";
 import { Grid, Typography, CardHeader } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -7,7 +7,23 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 
+const getRequest = async () => {
+    const response = await fetch('api/Animals');
+    const data = await response.json();
+    console.log(data)
+    console.log('huh')
+}
+
 export default function CardList() {
+
+    const [card, setCard] = useState('');
+
+
+
+    getRequest();
+    console.log('hello')
+
+
     const pet_data = {
         name: [
             { name: "Tiger Queen", type: "Cat", breed: "Siamese", gender: "Female" },

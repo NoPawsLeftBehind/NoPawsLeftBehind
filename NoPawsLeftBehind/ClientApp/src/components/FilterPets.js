@@ -25,7 +25,7 @@ export default function FilterPets(props) {
     };
 
     const drawer = (
-        <div m={100}>
+        <div >
             <Toolbar />
 
             <Stack spacing={4} p={2}>
@@ -110,7 +110,7 @@ export default function FilterPets(props) {
                 position="fixed"
                 zIndex={1400}
                 sx={{
-            
+                    width: { sm: `calc(100% - ${drawerWidth}px)` },
                     ml: { sm: `${drawerWidth}px` },
                     mt: 7,
                     
