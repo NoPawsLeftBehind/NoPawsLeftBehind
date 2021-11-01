@@ -12,6 +12,7 @@ env:
   WORKING_DIRECTORY: NoPawsLeftBehind
   REACT_APP_AUTH0_DOMAIN: ${{ secrets.REACT_APP_AUTH0_DOMAIN }}
   REACT_APP_AUTH0_CLIENT_ID: ${{ secrets.REACT_APP_AUTH0_CLIENT_ID }}
+  REACT_APP_AUTH0_AUDIENCE: ${{ secrets.REACT_APP_AUTH0_AUDIENCE }}
 jobs:
   build-and-deploy:
     runs-on: windows-latest
