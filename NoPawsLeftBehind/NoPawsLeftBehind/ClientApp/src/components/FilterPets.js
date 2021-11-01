@@ -29,7 +29,7 @@ export default function FilterPets(props) {
     const drawer = (
         <div >
             <Toolbar />
-
+            <Toolbar />
             <Stack spacing={4} p={2}>
                 <FormControl>
                     <InputLabel variant="standard" htmlFor="uncontrolled-native">
@@ -109,11 +109,10 @@ export default function FilterPets(props) {
         <ThemeProvider theme={appTheme}>
         <Box sx={{ display: "flex" }} mt={5}>
             <CssBaseline />
-            <AppBar
+                <AppBar
                 position="fixed"
                 style={{ zIndex: 1252 }}
-                sx={{
-                    width: { sm: `calc(100% - ${drawerWidth}px)` },
+                    sx={{
                     ml: { sm: `${drawerWidth}px` },
                     mt: 7,
                     
