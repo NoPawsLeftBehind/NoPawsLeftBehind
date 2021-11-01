@@ -13,6 +13,8 @@ import NativeSelect from "@mui/material/NativeSelect";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import CardList from "./CardList";
+import { appTheme } from './Theme.js'
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const drawerWidth = 240;
 
@@ -104,11 +106,12 @@ export default function FilterPets(props) {
         window !== undefined ? () => window().document.body : undefined;
 
     return (
+        <ThemeProvider theme={appTheme}>
         <Box sx={{ display: "flex" }} mt={5}>
             <CssBaseline />
             <AppBar
                 position="fixed"
-                zIndex={1400}
+                style={{ zIndex: 1252 }}
                 sx={{
                     width: { sm: `calc(100% - ${drawerWidth}px)` },
                     ml: { sm: `${drawerWidth}px` },
@@ -139,6 +142,7 @@ export default function FilterPets(props) {
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
                 <Drawer mt={7}
                     container={container}
+                    style={{ zIndex: 1250 }}
                     variant="temporary"
                     open={mobileOpen}
                     onClose={handleDrawerToggle}
@@ -157,6 +161,7 @@ export default function FilterPets(props) {
                 </Drawer>
                 <Drawer m={7}
                     variant="permanent"
+                    style={{ zIndex: 1250 }}
                     sx={{
                         display: { xs: "none", sm: "block" },
                         "& .MuiDrawer-paper": {
@@ -181,7 +186,8 @@ export default function FilterPets(props) {
                 <Toolbar />
                 <CardList />
             </Box>
-        </Box>
+            </Box>
+            </ThemeProvider>
     );
 }
 
