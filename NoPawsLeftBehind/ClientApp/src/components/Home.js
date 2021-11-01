@@ -4,6 +4,8 @@ import { ThemeProvider } from '@mui/material/styles';
 import Pup from "../images/pup-flower.jpg";
 import '../style/Home.css';
 import { appTheme } from './Theme.js'
+import HomeLoginButton from './HomeLoginButton.js'
+import HomeSignupButton from './HomeSignupButton';
 
 export class Home extends Component {
     render() {
@@ -26,8 +28,10 @@ export class Home extends Component {
                                 Sign up today!
                             </p>
                             <Stack>
-                                <Button variant="contained" id="sign-up">Sign Up</Button>
-                                <Button variant="outlined" id="login">Login</Button>
+                                {/*<Button variant="contained" id="sign-up">Sign Up</Button>*/}
+                                <HomeSignupButton/>
+                                <HomeLoginButton/>
+                                {/*<Button variant="outlined" id="login">Login</Button>*/}
                             </Stack>
                         </Grid>
                     </Grid>

@@ -5,6 +5,9 @@ import { ThemeProvider } from '@mui/material/styles';
 import '../style/Header.css';
 import { appTheme } from './Theme.js'
 import PetsIcon from '@mui/icons-material/Pets';
+import LoginButton from './LoginButton';
+import LogoutButton from './LogoutButton';
+import SignupButton from './SignupButton';
 
 export class Header extends Component {
     constructor(props) {
@@ -40,8 +43,9 @@ export class Header extends Component {
                                     <Nav.Link className="mx-4" href="/fetch-data">FAQ</Nav.Link>
                                 </Nav>
                                 <Nav>
-                                    <Button color="secondary">Login</Button>
-                                    <Button color="secondary">Sign Up</Button>
+                                    <SignupButton />
+                                    <LoginButton />
+                                    <LogoutButton/>
                                 </Nav>
                             </Navbar.Collapse>
                         </Container>
