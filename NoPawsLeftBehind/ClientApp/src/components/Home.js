@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Paper, Divider, Button, Stack, Grid } from '@mui/material'
+import { Paper, Divider, Stack, Grid } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles';
 import Pup from "../images/pup-flower.jpg";
 import '../style/Home.css';
@@ -28,10 +28,8 @@ export class Home extends Component {
                                 Sign up today!
                             </p>
                             <Stack>
-                                {/*<Button variant="contained" id="sign-up">Sign Up</Button>*/}
                                 <HomeSignupButton/>
                                 <HomeLoginButton/>
-                                {/*<Button variant="outlined" id="login">Login</Button>*/}
                             </Stack>
                         </Grid>
                     </Grid>
