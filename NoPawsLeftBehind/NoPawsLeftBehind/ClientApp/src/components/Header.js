@@ -37,7 +37,7 @@ export class Header extends Component {
                                 <Nav className="me-auto">
                                     <Nav.Link className="mx-4" href="/">Home</Nav.Link>
                                     <Nav.Link className="mx-4" href="/counter">About</Nav.Link>
-                                    <Nav.Link className="mx-4" href="/fetch-data">Pet Search</Nav.Link>
+                                    <Nav.Link className="mx-4" href="/search">Pet Search</Nav.Link>
                                     <Nav.Link className="mx-4" href="/counter">Contact</Nav.Link>
                                     <Nav.Link className="mx-4" href="/fetch-data">FAQ</Nav.Link>
                                 </Nav>
