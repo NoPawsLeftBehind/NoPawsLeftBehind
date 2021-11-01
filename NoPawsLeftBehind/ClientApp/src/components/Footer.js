@@ -8,6 +8,9 @@ export class Footer extends React.Component {
     render() {
         return (
             <Box
+                style={{ zIndex: 1252 }}
+                position="relative"
+                component="footer"
                 display="flex"
                 justifyContent="center"
                 alignItems="center"

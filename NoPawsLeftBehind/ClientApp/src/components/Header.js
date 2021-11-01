@@ -28,7 +28,7 @@ export class Header extends Component {
         return (
             <header>
                 <ThemeProvider theme={appTheme}>
-                    <Navbar collapseOnSelect expand="lg" className="color-nav" variant="dark">
+                    <Navbar style={{ zIndex: 1252 }}  collapseOnSelect expand="lg" className="color-nav" variant="dark">
                         <Container >
                             <PetsIcon sx={{ color: 'white', mr: 1, mb: 1}} />
                             <Navbar.Brand href="#home">No Paws Left Behind</Navbar.Brand>
@@ -37,7 +37,7 @@ export class Header extends Component {
                                 <Nav className="me-auto">
                                     <Nav.Link className="mx-4" href="/">Home</Nav.Link>
                                     <Nav.Link className="mx-4" href="/counter">About</Nav.Link>
-                                    <Nav.Link className="mx-4" href="/fetch-data">Pet Search</Nav.Link>
+                                    <Nav.Link className="mx-4" href="/search">Pet Search</Nav.Link>
                                     <Nav.Link className="mx-4" href="/counter">Contact</Nav.Link>
                                     <Nav.Link className="mx-4" href="/fetch-data">FAQ</Nav.Link>
                                 </Nav>
