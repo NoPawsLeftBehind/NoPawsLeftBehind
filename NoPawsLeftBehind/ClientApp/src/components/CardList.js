@@ -1,5 +1,5 @@
 ﻿import React, { Component } from "react";
-import { Grid, Typography, CardHeader } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -36,7 +36,7 @@ export class CardList extends Component {
             id: [1, 2, 3, 4]
         };
 
-        if (this.state.animals.length != 0) {
+        if (this.state.animals.length !== 0) {
 
             pet_data.name = this.state.animals
         }
