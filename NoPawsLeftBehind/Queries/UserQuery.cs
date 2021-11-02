@@ -21,7 +21,7 @@ namespace NoPawsLeftBehind.Queries
 
         public AppDb Db { get; }
 
-        public async Task<IEnumerable<User>> ReadAllAsync()
+        public async Task<List<User>> ReadAllAsync()
         {
             List<User> userList = new List<User>();
 
