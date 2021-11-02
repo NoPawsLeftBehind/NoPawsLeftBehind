@@ -14,7 +14,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import CardList from "./CardList";
 import { appTheme } from './Theme.js'
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 
 const drawerWidth = 240;
 
