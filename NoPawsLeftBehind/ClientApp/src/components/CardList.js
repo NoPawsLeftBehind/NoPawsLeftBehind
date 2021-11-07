@@ -8,8 +8,6 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 
 export class CardList extends Component {
-
-
     constructor(props) {
         super(props);
         this.state = { animals: [], loading: true };
@@ -20,8 +18,8 @@ export class CardList extends Component {
     }
 
     render() {
-
-        console.log(this.state)
+        console.log(this.state);
+        console.log(this.props);
 
         let pet_data = {
             name: [
@@ -36,11 +34,9 @@ export class CardList extends Component {
             id: [1, 2, 3, 4]
         };
 
-        if (this.state.animals.length != 0) {
-
-            pet_data.name = this.state.animals
+        if (this.props.filterResults.animals != 0) {
+            pet_data.name = this.props.filterResults.animals;
         }
-
 
         return (
             <Container justifyContent="center">
@@ -72,10 +68,18 @@ export class CardList extends Component {
                                     <Typography gutterBottom variant="h5" component="div">
                                         {`${elem.name}`}
                                     </Typography>
-                                    <Typography variant="body1" color="text.secondary">{`Type: ${elem.type}`}</Typography>
-                                    <Typography variant="body1" color="text.secondary">{`Breed: ${elem.breed}`}</Typography>
-                                    <Typography variant="body1" color="text.secondary">{`Gender: ${elem.gender}`}</Typography>
-
+                                    <Typography
+                                        variant="body1"
+                                        color="text.secondary"
+                                    >{`Type: ${elem.type}`}</Typography>
+                                    <Typography
+                                        variant="body1"
+                                        color="text.secondary"
+                                    >{`Breed: ${elem.breed}`}</Typography>
+                                    <Typography
+                                        variant="body1"
+                                        color="text.secondary"
+                                    >{`Gender: ${elem.gender}`}</Typography>
                                 </CardContent>
                                 <CardActions>
                                     <Button size="small">Save</Button>
@@ -90,7 +94,7 @@ export class CardList extends Component {
     }
 
     async populateAnimalsData() {
-        const response = await fetch('api/animals');
+        const response = await fetch("api/animals");
         const data = await response.json();
         this.setState({ animals: data, loading: false });
     }
