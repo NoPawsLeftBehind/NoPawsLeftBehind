@@ -7,6 +7,8 @@ import PetsIcon from '@mui/icons-material/Pets';
 import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';
 import SignupButton from './SignupButton';
+import DashboardButton from './DashboardButton';
+
 
 export class Header extends Component {
     constructor(props) {
@@ -28,7 +30,7 @@ export class Header extends Component {
         return (
             <header>
                 <ThemeProvider theme={appTheme}>
-                    <Navbar style={{ zIndex: 1252 }}  fixed='top' collapseOnSelect expand="lg" className="color-nav" variant="dark">
+                    <Navbar collapseOnSelect expand="lg" className="color-nav" variant="dark">
                         <Container >
                             <PetsIcon sx={{ color: 'white', mr: 1, mb: 1}} />
                             <Navbar.Brand href="#home">No Paws Left Behind</Navbar.Brand>
@@ -44,7 +46,8 @@ export class Header extends Component {
                                 <Nav>
                                     <SignupButton />
                                     <LoginButton />
-                                    <LogoutButton/>
+                                    <DashboardButton />
+                                    <LogoutButton />
                                 </Nav>
                             </Navbar.Collapse>
                         </Container>
