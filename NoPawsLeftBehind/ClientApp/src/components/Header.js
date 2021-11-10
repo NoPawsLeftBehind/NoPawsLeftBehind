@@ -9,7 +9,6 @@ import LogoutButton from './LogoutButton';
 import SignupButton from './SignupButton';
 import DashboardButton from './DashboardButton';
 
-
 export class Header extends Component {
     constructor(props) {
         super(props);
@@ -31,7 +30,7 @@ export class Header extends Component {
             <header>
                 <ThemeProvider theme={appTheme}>
                     <Navbar collapseOnSelect expand="lg" className="color-nav" variant="dark">
-                        <Container >
+                        <Container>
                             <PetsIcon sx={{ color: 'white', mr: 1, mb: 1}} />
                             <Navbar.Brand href="#home">No Paws Left Behind</Navbar.Brand>
                             <Navbar.Toggle aria-controls="responsive-navbar-nav" />

@@ -1,8 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { withAuth0 } from '@auth0/auth0-react';
 import { Button } from '@mui/material';
-import { useHistory } from 'react-router-dom';
-import PetsIcon from '@mui/icons-material/Pets';
 
 class DashboardButton extends Component {
     render() {
