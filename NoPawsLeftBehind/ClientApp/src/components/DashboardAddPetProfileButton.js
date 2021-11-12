@@ -12,8 +12,8 @@ const DashboardAddPetProfileButton = () => {
 
     return (
         (user["https://nopawsleftbehind.azurewebsites.net/role"] === "admin") && (
-            <div className="center-items">
-                <Box p={2}>
+            <div>
+                <Box className="center-items" p={2} >
                     <Button variant='contained' href="/add-pet">
                         Add Pet Profile
                     </Button>
