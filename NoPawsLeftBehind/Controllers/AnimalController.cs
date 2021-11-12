@@ -28,5 +28,14 @@ namespace NoPawsLeftBehind.Controllers
             var result = await query.AllAnimalsAsync();
             return new OkObjectResult(result);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAnimal(int id)
+        {
+            await Db.Connection.OpenAsync();
+            var query = new AnimalQuery(Db);
+            var result = await query.OneAnimalAsync(id);
+            return new OkObjectResult(result);
+        }
     }
 }
