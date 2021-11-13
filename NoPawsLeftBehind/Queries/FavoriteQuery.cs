@@ -66,5 +66,17 @@ namespace NoPawsLeftBehind.Queries
 
             return animalList;
         }
+
+        public async Task InsertAsync(string userID, int animalID)
+        {
+            using MySqlCommand cmd = Db.Connection.CreateCommand();
+            cmd.CommandText = @"INSERT INTO `Users_Animals` (`userID`, `animalID`) VALUES (@userID, @animalID);";
+
+            ApiHelper apiHelper = new ApiHelper();
+            apiHelper.BindStringParam(cmd, Tuple.Create("@userID", userID));
+            apiHelper.BindIntParam(cmd, Tuple.Create("@animalID", animalID));
+
+            await cmd.ExecuteNonQueryAsync();
+        }
     }
 }

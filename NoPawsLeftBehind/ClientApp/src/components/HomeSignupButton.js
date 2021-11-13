@@ -15,7 +15,7 @@ const HomeSignupButton = () => {
                 onClick={() =>
                     loginWithRedirect({
                         screen_hint: 'signup',
-                        loginAfterSignup: false,
+                        auto_login: false,
                     })
                 }
             >

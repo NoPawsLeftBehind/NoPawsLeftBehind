@@ -6,38 +6,32 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
+import { withAuth0 } from '@auth0/auth0-react';
 
 export class DashboardFavoritesList extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { animals: [], loading: true };
+        this.state = { favorites: [], loading: true };
     }
 
     componentDidMount() {
-        this.populateAnimalsData();
+        this.populateFavoritesData();
     }
 
     render() {
-
-        console.log(this.state)
+        console.log(this.state);
+        console.log(this.props);
 
         let pet_data = {
             name: [
-                { name: "Tiger King", type: "Cat", breed: "Siamese", gender: "Female" },
-                { name: "Tiger King", type: "Cat", breed: "Siamese", gender: "Female" },
-                { name: "Tiger King", type: "Cat", breed: "Siamese", gender: "Female" },
-                { name: "Tiger King", type: "Cat", breed: "Siamese", gender: "Female" },
-                { name: "Tiger King", type: "Cat", breed: "Siamese", gender: "Female" },
-                { name: "Tiger King", type: "Cat", breed: "Siamese", gender: "Female" },
-                { name: "Tiger King", type: "Cat", breed: "Siamese", gender: "Female" }
-            ],
-            id: [1, 2, 3, 4]
+                { name: "Velvet", type: "Cat", breed: "Black-Flooff", gender: "Female" },
+                { name: "Sable", type: "Cat", breed: "Gray-Flooff", gender: "Female" }
+            ]
         };
 
-        if (this.state.animals.length !== 0) {
-
-            pet_data.name = this.state.animals
+        if (this.state.favorites.length !== 0) {
+            pet_data.name = this.state.favorites
         }
 
         return (
@@ -82,11 +76,27 @@ export class DashboardFavoritesList extends Component {
         );
     }
 
-    async populateAnimalsData() {
-        const response = await fetch('api/animals');
-        const data = await response.json();
-        this.setState({ animals: data, loading: false });
+    async populateFavoritesData() {
+        try {
+            const { getAccessTokenSilently } = this.props.auth0;
+            const token = await getAccessTokenSilently();
+
+            const response = await fetch(
+                `api/favorite`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                },
+            );
+
+            const data = await response.json();
+            this.setState({ favorites: data, loading: false });
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
 }
 
-export default DashboardFavoritesList;
+export default withAuth0(DashboardFavoritesList);
