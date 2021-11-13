@@ -35,7 +35,7 @@ export class DashboardFavoritesList extends Component {
         }
 
         return (
-            <Container justifyContent="center">
+            <Container>
                 <Grid
                     container
                     spacing={2}
@@ -52,20 +52,20 @@ export class DashboardFavoritesList extends Component {
                             lg={3}
                             key={pet_data.name.indexOf(elem)}
                         >
-                            <Card sx={{ maxWidth: 275, m: 1 }}>
+                            <Card sx={{ maxWidth: 100, m: 1, justfyContent: "center" }}>
                                 <CardMedia
                                     component="img"
                                     alt="green iguana"
-                                    height="150"
-                                    sx={{ width: "95%", height: 150, border: 1 }}
+                                    height="100"
+                                    sx={{ width: "95%", height: 100, border: 1 }}
                                     image="https://cdn2.bulbagarden.net/upload/thumb/e/e3/052Meowth-Alola.png/600px-052Meowth-Alola.png"
                                 />
                                 <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div">
+                                    <Typography variant="h6" component="div">
                                         {`${elem.name}`}
                                     </Typography>
                                 </CardContent>
-                                <CardActions>
+                                <CardActions sx={{ justifyContent: "center" }}>
                                     <Button size="small">Adopt</Button>
                                 </CardActions>
                             </Card>
