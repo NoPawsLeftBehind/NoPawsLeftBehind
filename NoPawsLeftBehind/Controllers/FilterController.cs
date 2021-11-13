@@ -43,6 +43,16 @@ namespace NoPawsLeftBehind.Controllers
             return new OkObjectResult(filterOptions);
         }
 
-        //TODO: Add HTTPPOST request with FROMBODY for filter results
+        [HttpPost]
+        public async Task<IActionResult> PostFilterResults([FromBody] FilterOptions options)
+        {
+            await Db.Connection.OpenAsync();
+
+            //TODO: Convert this to utilizing options to create new query. This will need to be added some query object (maybe a new one).
+            AnimalQuery animalQuery = new AnimalQuery(Db);
+            var result = animalQuery.AllAnimalsAsync();
+
+            return new OkObjectResult(result);
+        }
     }
 }
