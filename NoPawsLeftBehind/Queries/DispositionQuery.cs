@@ -26,7 +26,23 @@ namespace NoPawsLeftBehind.Queries
 
             using var cmd = Db.Connection.CreateCommand();
             cmd.CommandText = @"SELECT 	*
-                                FROM Dispositions a";
+                                FROM Dispositions";
+
+            return await ReadAllAsync(await cmd.ExecuteReaderAsync());
+        }
+
+        //TODO: Add in pull of a list of dispositions for a single animal
+        public async Task<List<Disposition>> AnimalDispositionsAsync(int id)
+        {
+            using var cmd = Db.Connection.CreateCommand();
+            cmd.CommandText = @"SELECT d.dispositionID,
+		                                d.disposition
+                                FROM Dispositions d
+                                LEFT JOIN Animals_Dispositions ad ON ad.dispositionID = d.dispositionID
+                                WHERE ad.animalID = @id;";
+
+            ApiHelper apiHelper = new ApiHelper();
+            apiHelper.BindIntParam(cmd, Tuple.Create("@id", id));
 
             return await ReadAllAsync(await cmd.ExecuteReaderAsync());
         }
@@ -51,6 +67,6 @@ namespace NoPawsLeftBehind.Queries
             return dispositions;
         }
 
-        //TODO: Add in pull of a list of dispositions for a single animal
+        
     }
 }
