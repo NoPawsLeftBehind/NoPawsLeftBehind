@@ -29,6 +29,7 @@ namespace NoPawsLeftBehind.Controllers
             return new OkObjectResult(result);
         }
 
+        //TODO: Add in gathering LIST of Dispositions
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAnimal(int id)
         {

@@ -42,5 +42,7 @@ namespace NoPawsLeftBehind.Controllers
 
             return new OkObjectResult(filterOptions);
         }
+
+        //TODO: Add HTTPPOST request with FROMBODY for filter results
     }
 }

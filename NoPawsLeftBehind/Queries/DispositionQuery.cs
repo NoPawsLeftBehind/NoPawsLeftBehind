@@ -50,5 +50,7 @@ namespace NoPawsLeftBehind.Queries
 
             return dispositions;
         }
+
+        //TODO: Add in pull of a list of dispositions for a single animal
     }
 }

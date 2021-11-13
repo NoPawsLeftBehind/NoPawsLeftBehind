@@ -23,6 +23,7 @@ namespace NoPawsLeftBehind.Models
         public string Description { get; set; }
         public string News { get; set; }
         public DateTime DateCreated { get; set; }
+        public List<Disposition> Dispositions { get; set; }
 
         internal AppDb Db { get; set; }
 
