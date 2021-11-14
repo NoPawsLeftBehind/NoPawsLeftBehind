@@ -1,0 +1,35 @@
+﻿#emailDiv {
+    padding: 5vh 5vh;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.email-text {
+    line-height: 4vh;
+    text-align: center;
+    min-width: 360px;
+    align-items: center;
+}
+
+h2 {
+    font-family: "Raleway", sans-serif;
+    position: relative;
+    margin-bottom: 1vh;
+    margin-top: 2vh;
+    padding-bottom: 1vh;
+    text-align: center;
+}
+
+p {
+    margin: 2vh;
+}
+
+body,
+html {
+    font-family: "Open Sans", sans-serif;
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+    color: #777;
+    font-weight: 400;
+}

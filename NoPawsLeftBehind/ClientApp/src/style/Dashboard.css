@@ -1,0 +1,54 @@
+﻿#dashbaoardDiv {
+    padding: 2vh 0;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+#greetingDiv {
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+#contact-paper {
+    min-width: 40vh;
+    text-align: center;
+}
+
+#favorites-paper {
+    min-width: 40vh;
+    text-align: center;
+}
+
+.center-items {
+    margin-top: 2vh;
+    text-align: center;
+    align-items: center;
+}
+
+.top-bottom-margin {
+    margin-bottom: 2vh;
+    margin-top: 2vh;
+}
+
+.left-right-margin {
+    margin-left: 2vh;
+    margin-right: 2vh;
+}
+
+h2 {
+    font-family: "Raleway", sans-serif;
+    position: relative;
+    margin-bottom: 1vh;
+    padding-bottom: 1vh;
+    text-align: center;
+}
+
+h3 {
+    font-family: "Raleway", sans-serif;
+    position: relative;
+    margin-bottom: 1vh;
+    padding-bottom: 1vh;
+    text-align: center;
+}

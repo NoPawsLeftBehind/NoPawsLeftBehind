@@ -53,7 +53,7 @@ namespace NoPawsLeftBehind
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("read:animals", policy => policy.Requirements.Add(new HasScopeRequirement("read:messages", domain)));
+                options.AddPolicy("insert:animals", policy => policy.Requirements.Add(new HasScopeRequirement("read:messages", domain)));
             });
 
             services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
