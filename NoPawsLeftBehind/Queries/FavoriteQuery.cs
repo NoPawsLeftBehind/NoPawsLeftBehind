@@ -32,8 +32,8 @@ namespace NoPawsLeftBehind.Queries
                                         LEFT JOIN Genders g ON a.genderID = g.genderID
                                         LEFT JOIN Availability av on a.availabilityID = av.availabilityID
                                         LEFT JOIN Colors c on a.colorID = c.colorID
-                                        LEFT JOIN Users_Animals ua on a.animalID = ua.animalID 
-                                        AND ua.userID = @userID;";
+                                        INNER JOIN Users_Animals ua on a.animalID = ua.animalID 
+                                        WHERE ua.userID = @userID;";
 
             ApiHelper apiHelper = new ApiHelper();
             apiHelper.BindStringParam(cmd, Tuple.Create("@userID", sUserId));

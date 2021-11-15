@@ -24,10 +24,7 @@ export class DashboardFavoritesList extends Component {
         console.log(this.props);
 
         let pet_data = {
-            name: [
-                { name: "Velvet", type: "Cat", breed: "Black-Flooff", gender: "Female" },
-                { name: "Sable", type: "Cat", breed: "Gray-Flooff", gender: "Female" }
-            ]
+            name: []
         };
 
         if (this.state.favorites.length !== 0) {
@@ -35,44 +32,46 @@ export class DashboardFavoritesList extends Component {
         }
 
         return (
-            <Container>
-                <Grid
-                    container
-                    spacing={2}
-                    direction="row"
-                    justifyContent="center"
-                    alignItems="flex-start"
-                >
-                    {pet_data.name.map((elem) => (
-                        <Grid
-                            item
-                            xs={12}
-                            sm={6}
-                            md={4}
-                            lg={3}
-                            key={pet_data.name.indexOf(elem)}
-                        >
-                            <Card sx={{ maxWidth: 100, m: 1, justfyContent: "center" }}>
-                                <CardMedia
-                                    component="img"
-                                    alt="green iguana"
-                                    height="100"
-                                    sx={{ width: "95%", height: 100, border: 1 }}
-                                    image="https://cdn2.bulbagarden.net/upload/thumb/e/e3/052Meowth-Alola.png/600px-052Meowth-Alola.png"
-                                />
-                                <CardContent>
-                                    <Typography variant="h6" component="div">
-                                        {`${elem.name}`}
-                                    </Typography>
-                                </CardContent>
-                                <CardActions sx={{ justifyContent: "center" }}>
-                                    <Button size="small">Adopt</Button>
-                                </CardActions>
-                            </Card>
-                        </Grid>
-                    ))}
-                </Grid>
-            </Container>
+            pet_data.name.length > 0 && (
+                <Container>
+                    <Grid
+                        container
+                        spacing={2}
+                        direction="row"
+                        justifyContent="center"
+                        alignItems="flex-start"
+                    >
+                        {pet_data.name.map((elem) => (
+                            <Grid
+                                item
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                lg={3}
+                                key={pet_data.name.indexOf(elem)}
+                            >
+                                <Card sx={{ maxWidth: 100, m: 1, justfyContent: "center" }}>
+                                    <CardMedia
+                                        component="img"
+                                        alt="green iguana"
+                                        height="100"
+                                        sx={{ width: "95%", height: 100, border: 1 }}
+                                        image="https://cdn2.bulbagarden.net/upload/thumb/e/e3/052Meowth-Alola.png/600px-052Meowth-Alola.png"
+                                    />
+                                    <CardContent>
+                                        <Typography variant="h6" component="div">
+                                            {`${elem.name}`}
+                                        </Typography>
+                                    </CardContent>
+                                    <CardActions sx={{ justifyContent: "center" }}>
+                                        <Button size="small">Adopt</Button>
+                                    </CardActions>
+                                </Card>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Container>
+            )
         );
     }
 
