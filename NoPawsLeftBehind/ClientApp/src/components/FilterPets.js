@@ -36,6 +36,10 @@ export default function FilterPets(props) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [filterResults, setFilterResults] = React.useState(sample);
 
+    React.useEffect(() => {
+        console.log(getFilterList())
+    });
+
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
@@ -63,12 +67,23 @@ export default function FilterPets(props) {
         return { animals: data, loading: false }
     };
 
+    const getFilterList = async () => {
+        const response = await fetch('api/animals');
+        const data = await response.json();
+
+            console.log('test5')
+            console.log(data)
+
+    };
+
     const onSubmit = (values) => {
         console.log(values);
         // Make a post request based on filter parameters
+
         var data = getRequest()
 
         // Set filterResults to the results of the promise
+
         data.then(function (result) {
             console.log(result)
             setFilterResults(result)
@@ -172,7 +187,7 @@ export default function FilterPets(props) {
     const container =
         window !== undefined ? () => window().document.body : undefined;
 
-    return (
+        return (
        <ThemeProvider theme={appTheme}>
         <Box sx={{ display: "flex" }} mt={5}>
             <CssBaseline />
