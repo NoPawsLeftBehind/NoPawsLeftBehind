@@ -44,13 +44,12 @@ namespace NoPawsLeftBehind.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostFilterResults([FromBody] FilterOptions options)
+        public async Task<IActionResult> PostFilterResults([FromBody] FilterChoices choices)
         {
             await Db.Connection.OpenAsync();
 
-            //TODO: Convert this to utilizing options to create new query. This will need to be added some query object (maybe a new one).
             AnimalQuery animalQuery = new AnimalQuery(Db);
-            var result = animalQuery.AllAnimalsAsync();
+            var result = await animalQuery.SearchAnimalsAsync(choices);
 
             return new OkObjectResult(result);
         }
