@@ -8,25 +8,55 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import { withAuth0 } from '@auth0/auth0-react';
 
-export class DashboardFavoritesList extends Component {
+export class DashboardAdoptList extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { favorites: [], loading: true };
+        this.state = { adoptions: [], loading: true };
     }
 
     componentDidMount() {
-        this.populateFavoritesData();
+        this.populatePendingAdoptionData();
     }
 
-    adopt = async e => {
+    approveAdopt = async e => {
         try {
             const { getAccessTokenSilently } = this.props.auth0;
             const token = await getAccessTokenSilently();
 
             const payload = {
                 animalID: e.target.parent.id,
-                status: 'adopt'
+                status: 'approve'
+            }
+
+            const response = await fetch(
+                `api/adoption`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify(payload)
+                },
+            );
+
+            const data = await response.json();
+            this.setState({ adoptions: data, loading: false });
+        }
+        catch (error) {
+            console.log(error);
+        }
+
+        this.populatePendingAdoptionData();
+    }
+
+    denyAdopt = async e => {
+        try {
+            const { getAccessTokenSilently } = this.props.auth0;
+            const token = await getAccessTokenSilently();
+
+            const payload = {
+                animalID: e.target.parent.id,
+                status: 'deny'
             }
 
             const response = await fetch(
@@ -57,8 +87,8 @@ export class DashboardFavoritesList extends Component {
             name: []
         };
 
-        if (this.state.favorites.length !== 0) {
-            pet_data.name = this.state.favorites
+        if (this.state.adoptions.length !== 0) {
+            pet_data.name = this.state.adoptions
         }
 
         return (
@@ -93,9 +123,9 @@ export class DashboardFavoritesList extends Component {
                                             {`${elem.name}`}
                                         </Typography>
                                     </CardContent>
-                                    <CardActions sx={{ justifyContent: "center" }}>
-                                        <Button id={`${elem.id}`} size="small" onClick={e => this.adopt(e)}>Adopt</Button>
-
+                                    <CardActions id={`${elem.id}`} sx={{ justifyContent: "center" }}>
+                                        <Button size="small" onClick={e => this.approveAdopt(e)}>Approve</Button>
+                                        <Button size="small" onClick={e => this.denyAdopt(e)} > Deny</Button>
                                     </CardActions>
                                 </Card>
                             </Grid>
@@ -106,13 +136,13 @@ export class DashboardFavoritesList extends Component {
         );
     }
 
-    async populateFavoritesData() {
+    async populatePendingAdoptionData() {
         try {
             const { getAccessTokenSilently } = this.props.auth0;
             const token = await getAccessTokenSilently();
 
             const response = await fetch(
-                `api/favorite`,
+                `api/adoption`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -121,7 +151,7 @@ export class DashboardFavoritesList extends Component {
             );
 
             const data = await response.json();
-            this.setState({ favorites: data, loading: false });
+            this.setState({ adoptions: data, loading: false });
         }
         catch (error) {
             console.log(error);
@@ -129,4 +159,4 @@ export class DashboardFavoritesList extends Component {
     }
 }
 
-export default withAuth0(DashboardFavoritesList);
+export default withAuth0(DashboardAdoptList);

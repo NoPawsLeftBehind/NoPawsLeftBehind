@@ -29,7 +29,7 @@ export class Header extends Component {
         return (
             <header>
                 <ThemeProvider theme={appTheme}>
-                    <Navbar collapseOnSelect expand="lg" className="color-nav" variant="dark">
+                    <Navbar style={{ zIndex: 1252 }} fixed='top' collapseOnSelect expand="lg" className="color-nav" variant="dark">
                         <Container>
                             <PetsIcon sx={{ color: 'white', mr: 1, mb: 1}} />
                             <Navbar.Brand href="#home">No Paws Left Behind</Navbar.Brand>
