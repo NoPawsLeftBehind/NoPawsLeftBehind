@@ -31,34 +31,25 @@ const sample = {
     ]
 };
 
+let filter_payload = {
+    type: [],
+    breed: [],
+    disposition: []
+};
+
 export default function FilterPets(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [filterResults, setFilterResults] = React.useState(sample);
+    const [filterList, setFilterList] = React.useState()
 
-    React.useEffect(() => {
-        console.log(getFilterList())
-    });
+    const getFilterList = async () => {
+        const response = await fetch('api/FilterOptions');
+        const data = await response.json();
 
-    const handleDrawerToggle = () => {
-        setMobileOpen(!mobileOpen);
-    };
-
-    // sample data to auto populate filter options
-
-    const filter_payload = {
-        type: ["Cat", "Dog"],
-        breed: ["Bulldog", "Poodle", "Pug", "Golden Retriever", "Boxer"],
-        size: ["Small", "Medium", "Large"],
-        gender: ["Male", "Female", "Other"]
-    };
+        return data
 
 
-    const initialValues = {
-        type: "",
-        breed: "",
-        size: "",
-        gender: ""
     };
 
     const getRequest = async () => {
@@ -67,13 +58,49 @@ export default function FilterPets(props) {
         return { animals: data, loading: false }
     };
 
-    const getFilterList = async () => {
-        const response = await fetch('api/animals');
-        const data = await response.json();
 
-            console.log('test5')
-            console.log(data)
+    React.useEffect(() => {
 
+        var fe_filters = ['type', 'breed', 'disposition']
+        var be_filters = ['typeName', 'breedName', 'disposition']
+
+        let data = getFilterList()
+        data.then(function (result) {
+
+            var cnt = 0
+            for (const prop in result) {
+                //console.log(result[prop]);
+
+                for (const element of result[prop]) {
+                    filter_payload[fe_filters[cnt]].push(element[be_filters[cnt]])
+                }
+                cnt++
+            }
+
+            console.log(filter_payload)
+            setFilterList(filter_payload)
+        })
+
+        getRequest().then(function (result) {
+            console.log(result)
+            setFilterResults(result)
+
+        })
+        
+    }, []);
+
+
+    const handleDrawerToggle = () => {
+        setMobileOpen(!mobileOpen);
+    };
+
+    // sample data to auto populate filter options
+
+
+    const initialValues = {
+        type: "",
+        breed: "",
+        disposition: ""
     };
 
     const onSubmit = (values) => {
@@ -141,41 +168,25 @@ export default function FilterPets(props) {
 
                                 <FormControl fullWidth>
                                     <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                                        Size
+                                        Disposition
                   </InputLabel>
                                     <NativeSelect
                                         defaultValue={30}
                                         onChange={handleChange}
-                                        name="size"
-                                        id="size"
+                                        name="disposition"
+                                        id="disposition"
                                     >
                                         <option value={"None"}>None</option>
-                                        {filter_payload.size.map((item) => (
+                                        {filter_payload.disposition.map((item) => (
                                             <option value={item}>{item}</option>
                                         ))}
                                     </NativeSelect>
                                 </FormControl>
 
-                                <FormControl fullWidth>
-                                    <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                                        Gender
-                  </InputLabel>
-                                    <NativeSelect
-                                        defaultValue={30}
-                                        onChange={handleChange}
-                                        name="gender"
-                                        id="gender"
-                                        value={values.gender}
-                                    >
-                                        <option value={"None"}>None</option>
-                                        {filter_payload.gender.map((item) => (
-                                            <option value={item}>{item}</option>
-                                        ))}
-                                    </NativeSelect>
-                                </FormControl>
+                             
                                 <Button type="submit" variant="contained">
                                     Search
-                </Button>
+                                </Button>
                             </Form>
                         );
                     }}

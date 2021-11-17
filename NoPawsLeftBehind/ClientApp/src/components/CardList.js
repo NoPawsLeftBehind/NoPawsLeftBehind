@@ -6,6 +6,10 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { pink } from "@mui/material/colors";
+import Favorited from "./Favorited";
+
 
 export class CardList extends Component {
     constructor(props) {
@@ -15,7 +19,6 @@ export class CardList extends Component {
 
 
     render() {
-        console.log(this.state);
         console.log(this.props);
 
         let pet_data = {
@@ -34,6 +37,7 @@ export class CardList extends Component {
 
         if (this.props.filterResults.animals != 0) {
             pet_data.name = this.props.filterResults.animals;
+            console.log(pet_data.name)
 
 
             return (
@@ -77,11 +81,11 @@ export class CardList extends Component {
                                         <Typography
                                             variant="body1"
                                             color="text.secondary"
-                                        >{`Gender: ${elem.gender}`}</Typography>
+                                        >{`Disposition: ${elem.dispositions}`}</Typography>
                                     </CardContent>
                                     <CardActions>
-                                        <Button size="small">Save</Button>
-                                        <Button size="small">Adopt</Button>
+                                        <Favorited />
+                                        <Button size="small">Page</Button>
                                     </CardActions>
                                 </Card>
                             </Grid>
