@@ -58,6 +58,29 @@ export default function FilterPets(props) {
         return { animals: data, loading: false }
     };
 
+    const postRequest = async function postRequest(url = '', payload = {}) {
+
+
+        const response = await fetch(url, {
+            method: 'POST', 
+            mode: 'cors', 
+            cache: 'no-cache', 
+            credentials: 'same-origin', 
+            headers: {
+                'Content-Type': 'application/json'
+               
+            },
+            redirect: 'follow', 
+            referrerPolicy: 'no-referrer',
+            body: JSON.stringify(payload) 
+        });
+
+        const data = await response.json();
+        console.log('test20')
+        console.log(data)
+        return { animals: data, loading: false }
+    }
+
 
     React.useEffect(() => {
 
@@ -77,7 +100,8 @@ export default function FilterPets(props) {
                 cnt++
             }
 
-            console.log(filter_payload)
+            //console.log(filter_payload)
+
             setFilterList(filter_payload)
         })
 
@@ -105,14 +129,25 @@ export default function FilterPets(props) {
 
     const onSubmit = (values) => {
         console.log(values);
+        const values_submit = {
+            AnimalType: values.type,
+            Breed: values.breed,
+            Disposition: values.disposition
+        }
+        console.log(values_submit)
         // Make a post request based on filter parameters
 
-        var data = getRequest()
+        var data = postRequest('api/FilterOptions', values_submit)
 
         // Set filterResults to the results of the promise
 
         data.then(function (result) {
             console.log(result)
+
+            if (result.animals == 0) {
+                result = sample
+            }
+
             setFilterResults(result)
 
         })

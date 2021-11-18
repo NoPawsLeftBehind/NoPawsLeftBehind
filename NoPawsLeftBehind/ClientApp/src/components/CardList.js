@@ -19,7 +19,7 @@ export class CardList extends Component {
 
 
     render() {
-        console.log(this.props);
+        // console.log(this.props);
 
         let pet_data = {
             name: [
