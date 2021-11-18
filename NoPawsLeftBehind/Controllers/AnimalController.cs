@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 using NoPawsLeftBehind.Database;
 using NoPawsLeftBehind.Models;
+using NoPawsLeftBehind.Queries;
 
 namespace NoPawsLeftBehind.Controllers
 {
@@ -27,6 +28,21 @@ namespace NoPawsLeftBehind.Controllers
             var query = new AnimalQuery(Db);
             var result = await query.AllAnimalsAsync();
             return new OkObjectResult(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAnimal(int id)
+        {
+            await Db.Connection.OpenAsync();
+            AnimalQuery animalQuery = new AnimalQuery(Db);
+            Animal animalResult = await animalQuery.OneAnimalAsync(id);
+
+            DispositionQuery dispoQuery = new DispositionQuery(Db);
+            List<Disposition> dispoResult = await dispoQuery.AnimalDispositionsAsync(id);
+
+            animalResult.Dispositions = dispoResult;
+
+            return new OkObjectResult(animalResult);
         }
     }
 }
