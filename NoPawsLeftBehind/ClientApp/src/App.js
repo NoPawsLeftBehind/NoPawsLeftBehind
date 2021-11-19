@@ -9,6 +9,8 @@ import AddPet from './components/AddPet';
 import FilterPets from './components/FilterPets';
 import { VerifyEmail } from './components/VerifyEmail';
 import './custom.css';
+import PetProfile from './components/pet_profile/PetProfile';
+
 
 export default class App extends Component {
     static displayName = App.name;
@@ -23,6 +25,7 @@ export default class App extends Component {
                 <Route path='/dashboard' component={Dashboard} />
                 <Route path='/add-pet' component={AddPet} />
                 <Route path='/verify-email' component={VerifyEmail} />
+                <Route path='/pet-profile/:id' component={PetProfile} />
             </Layout>
         );
     }
