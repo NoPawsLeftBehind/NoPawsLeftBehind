@@ -1,5 +1,5 @@
 ﻿import React, { Component } from "react";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, Toolbar } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -40,9 +40,9 @@ export class AddPet extends Component {
             pet_data.name = this.state.animals
         }
 
-
         return (
             <Container justifyContent="center">
+                <Toolbar />
                 <Grid
                     container
                     spacing={2}

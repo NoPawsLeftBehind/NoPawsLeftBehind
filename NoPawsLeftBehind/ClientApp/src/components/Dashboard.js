@@ -1,10 +1,10 @@
 ﻿import React, { Component } from 'react';
-import { Paper, Divider, Stack, Grid, Box } from '@mui/material'
+import { Paper, Divider, Stack, Grid, Box, Toolbar } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles';
 import { appTheme } from './Theme.js'
 import { withAuth0 } from '@auth0/auth0-react';
-import FavoritesList from './FavoritesList';
-import DashboardAddPetProfileButton from './DashboardAddPetProfileButton';
+import DashboardUser from './DashboardUser';
+import DashboardAdmin from './DashboardAdmin';
 import '../style/Dashboard.css';
 
 class Dashboard extends Component {
@@ -19,6 +19,7 @@ class Dashboard extends Component {
             isAuthenticated && (
                 <ThemeProvider theme={appTheme}>
                     <div id="dashbaoardDiv">
+                        <Toolbar />
                         <Stack>
                             <h2>My Dashboard</h2>
                             <h3 id="greetingDiv"> Hello {user.nickname}!</h3>
@@ -38,8 +39,8 @@ class Dashboard extends Component {
                                     </Paper>
                                 </Grid>
                                 <Grid item xs={12} sm={12} md={6}justify="center" alignItems="center">
-                                    <DashboardAddPetProfileButton />
-                                    <FavoritesList />
+                                    <DashboardAdmin />
+                                    <DashboardUser />
                                 </Grid>
                             </Grid>
                         </Stack>

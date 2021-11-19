@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import { Divider, Grid } from '@mui/material'
+import { Divider, Grid, Toolbar } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles';
 import '../style/VerifyEmail.css';
 import { appTheme } from './Theme.js'
@@ -9,6 +9,7 @@ export class VerifyEmail extends Component {
         return (
             <ThemeProvider theme={appTheme}>
                 <div id="#emailDiv">
+                    <Toolbar />
                     <Grid container spacing={3} justify="space-evenly" alignItems="center" style={{ flexGrow: 1 }}>
                         <Grid item sm={12} className="email-text">
                             <h2>Verify Email</h2>

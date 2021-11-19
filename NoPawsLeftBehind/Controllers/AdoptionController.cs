@@ -12,9 +12,9 @@ namespace NoPawsLeftBehind.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class FavoriteController : BaseController
+    public class AdoptionController : BaseController
     {
-        public FavoriteController(AppDb db)
+        public AdoptionController(AppDb db)
         {
             Db = db;
         }
@@ -23,17 +23,16 @@ namespace NoPawsLeftBehind.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> ReadAllFavoritesAsync()
+        public async Task<IActionResult> ReadAllPendingAdoptionAsync()
         {
             await Db.Connection.OpenAsync();
 
-            FavoriteQuery favoriteQuery = new FavoriteQuery(Db);
+            AdoptionQuery adoptionQuery = new AdoptionQuery(Db);
             UserQuery userQuery = new UserQuery(Db);
 
             try
             {
                 string userId = GetUserId();
-
                 bool bUserExists = await userQuery.ExistsAsync(userId);
 
                 if (!bUserExists)
@@ -41,10 +40,19 @@ namespace NoPawsLeftBehind.Controllers
                     User user = new User();
                     user.userID = userId;
 
-                    await userQuery.InsertAsync(user);
+                    try
+                    {
+                        await userQuery.InsertAsync(user);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                        return new ObjectResult(ex);
+                    }
+
                 }
 
-                IEnumerable<Animal> result = await favoriteQuery.ReadFavoritesAsync(userId);
+                IEnumerable<Animal> result = await adoptionQuery.ReadPendingPetsAsync();
                 return new OkObjectResult(result);
             }
             catch (Exception ex)
@@ -55,26 +63,17 @@ namespace NoPawsLeftBehind.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateFavorite([FromBody] int animalId)
+        [Authorize]
+        public async Task<IActionResult> UpdateAdoptionStatus([FromBody] AdoptionStatus adoptionStatus)
         {
             await Db.Connection.OpenAsync();
 
-            FavoriteQuery favoriteQuery = new FavoriteQuery(Db);
-            try
-            {
-                string userId = GetUserId();
+            Console.WriteLine(adoptionStatus.AnimalId);
+            Console.WriteLine(adoptionStatus.Status);
 
-                if (await favoriteQuery.ExistsAsync(userId, animalId))
-                    await favoriteQuery.DeleteAsync(userId, animalId);
-                else
-                    await favoriteQuery.InsertAsync(userId, animalId);
-
-                return new OkObjectResult("Favorite added.");
-            }
-            catch (Exception ex)
-            {
-                return new ObjectResult(ex);
-            }
+            // TODO
+            
+            return new ObjectResult("Method not implemented!");
         }
     }
 }
