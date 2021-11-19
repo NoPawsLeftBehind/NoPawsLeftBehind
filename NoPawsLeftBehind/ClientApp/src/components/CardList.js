@@ -6,8 +6,6 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import { pink } from "@mui/material/colors";
 import Favorited from "./Favorited";
 
 
