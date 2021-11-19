@@ -25,15 +25,17 @@ export class DashboardAdoptList extends Component {
             const token = await getAccessTokenSilently();
 
             const payload = {
-                animalID: e.target.parent.id,
+                animalID: e,
                 status: 'approve'
             }
 
             const response = await fetch(
                 `api/adoption`,
                 {
+                    method: 'POST',
                     headers: {
                         Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(payload)
                 },
@@ -55,15 +57,17 @@ export class DashboardAdoptList extends Component {
             const token = await getAccessTokenSilently();
 
             const payload = {
-                animalID: e.target.parent.id,
+                animalID: e,
                 status: 'deny'
             }
 
             const response = await fetch(
                 `api/adoption`,
                 {
+                    method: 'POST',
                     headers: {
                         Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(payload)
                 },
@@ -110,12 +114,12 @@ export class DashboardAdoptList extends Component {
                                 lg={3}
                                 key={pet_data.name.indexOf(elem)}
                             >
-                                <Card sx={{ maxWidth: 100, m: 1, justfyContent: "center" }}>
+                                <Card sx={{ minWidth: 175, m: 1, justfyContent: "center" }}>
                                     <CardMedia
                                         component="img"
                                         alt="green iguana"
-                                        height="100"
-                                        sx={{ width: "95%", height: 100, border: 1 }}
+                                        height="150"
+                                        sx={{ width: "95%", height: 150, border: 1 }}
                                         image="https://cdn2.bulbagarden.net/upload/thumb/e/e3/052Meowth-Alola.png/600px-052Meowth-Alola.png"
                                     />
                                     <CardContent>
@@ -123,9 +127,9 @@ export class DashboardAdoptList extends Component {
                                             {`${elem.name}`}
                                         </Typography>
                                     </CardContent>
-                                    <CardActions id={`${elem.id}`} sx={{ justifyContent: "center" }}>
-                                        <Button size="small" onClick={e => this.approveAdopt(e)}>Approve</Button>
-                                        <Button size="small" onClick={e => this.denyAdopt(e)} > Deny</Button>
+                                    <CardActions sx={{ justifyContent: "center" }}>
+                                        <Button size="small" onClick={e => this.approveAdopt(`${elem.id}`)}>Approve</Button>
+                                        <Button size="small" onClick={e => this.denyAdopt(`${elem.id}`)} > Deny</Button>
                                     </CardActions>
                                 </Card>
                             </Grid>
@@ -146,6 +150,7 @@ export class DashboardAdoptList extends Component {
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json',
                     },
                 },
             );

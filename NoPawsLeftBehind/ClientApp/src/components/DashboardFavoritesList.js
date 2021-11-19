@@ -25,15 +25,17 @@ export class DashboardFavoritesList extends Component {
             const token = await getAccessTokenSilently();
 
             const payload = {
-                animalID: e.target.parent.id,
+                animalID: e,
                 status: 'adopt'
             }
 
             const response = await fetch(
                 `api/adoption`,
                 {
+                    method: 'POST',
                     headers: {
                         Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(payload)
                 },
@@ -94,8 +96,7 @@ export class DashboardFavoritesList extends Component {
                                         </Typography>
                                     </CardContent>
                                     <CardActions sx={{ justifyContent: "center" }}>
-                                        <Button id={`${elem.id}`} size="small" onClick={e => this.adopt(e)}>Adopt</Button>
-
+                                        <Button size="small" onClick={e => this.adopt(`${elem.id}`)}>Adopt</Button>
                                     </CardActions>
                                 </Card>
                             </Grid>
@@ -116,6 +117,7 @@ export class DashboardFavoritesList extends Component {
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json',
                     },
                 },
             );
