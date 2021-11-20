@@ -6,7 +6,17 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import Favorited from "./Favorited";
 
-export default function ActionAreaCard() {
+export default function ActionAreaCard({ availability }) {
+
+    const [adoptionStatus, setAdoptionStatus] = React.useState(availability);
+
+    React.useEffect(() => {
+        console.log(adoptionStatus)
+
+        setAdoptionStatus(availability);
+    }, [availability]);
+
+
     return (
         <Card sx={{ maxWidth: 400, margin: "auto" }}>
             <CardActionArea>
@@ -18,7 +28,7 @@ export default function ActionAreaCard() {
                 />
                 <CardContent sx={{ display: "flex", justifyContent: "space-between" }}>
                     <Typography gutterBottom variant="h6" component="div">
-                        Status: Available
+                        Status: {adoptionStatus}
           </Typography>
 
                     <Favorited />

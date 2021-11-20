@@ -11,15 +11,21 @@ function createData(name, calories) {
     return { name, calories };
 }
 
-const rows = [
-    createData("Type", "Dog"),
-    createData("Breed", "Australian Shepherd"),
-    createData("Size", "Medium"),
-    createData("Gender", "Male"),
-    createData("Age", "3 yr")
-];
+export default function PetTable({petTraits}) {
+    const [traits, setTraits] = React.useState(petTraits);
 
-export default function PetTable() {
+    React.useEffect(() => {
+        setTraits(petTraits);
+    }, [petTraits]);
+
+    const rows = [
+        createData("Type", traits.type),
+        createData("Breed", traits.breed),
+        createData("Size", traits.weight),
+        createData("Gender", traits.gender),
+        createData("Age", traits.age)
+    ];
+
     return (
         <TableContainer component={Paper} sx={{ mt: 3 }}>
             <Table aria-label="simple table">

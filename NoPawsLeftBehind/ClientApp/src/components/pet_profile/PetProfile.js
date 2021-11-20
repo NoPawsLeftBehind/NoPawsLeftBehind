@@ -12,11 +12,40 @@ import Toolbar from "@mui/material/Toolbar";
 import "./styles.css";
 import { useParams } from "react-router-dom";
 
+var pet_profile_info = {
+    name: 'none',
+    description: 'none',
+    type: 'none',
+    breed: 'none',
+    size: 'none',
+    gender: 'none',
+    age: 'none',
+    color: 'none',
+    availability: 'none'
+}
+
 export default function App() {
     const { id } = useParams();
     const [petID, setPetID] = React.useState(id);
+    const [petInfo, setPetInfo] = React.useState(pet_profile_info)
 
-    console.log(id)
+    const getRequest = async () => {
+        const response = await fetch('api/animals/' + id);
+        const data = await response.json();
+        return data
+    }
+
+    React.useEffect(() => {
+
+        getRequest().then(function (result) {
+            console.log('get request')
+            console.log(result)
+
+
+            setPetInfo(result)
+        });
+
+    }, []);
 
     return (
         <div className="App">
@@ -54,7 +83,7 @@ export default function App() {
                             }}
                         >
                             <Box width="100%">
-                                <ActionAreaCard />
+                                <ActionAreaCard availability={petInfo.availability} />
                                 <Button
                                     variant="contained"
                                     sx={{ mt: 2, bgcolor: "#4a148c" }}
@@ -77,20 +106,24 @@ export default function App() {
                             }}
                         >
                             <Typography variant="h3" align="left" mb={2}>
-                                Pet's name
+                                {/*Pet's name*/}
+                                {petInfo.name}
+
               </Typography>
                             <Typography variant="h5" align="left" mb={1}>
                                 About
+
               </Typography>
                             <Typography variant="p" align="left">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting
+                                {/*Lorem Ipsum is simply dummy text of the printing and typesetting
                                 industry. Lorem Ipsum has been the industry's standard dummy
                                 text ever since the 1500s, when an unknown printer took a galley
                                 of type and scrambled it to make a type specimen book. It has
                                 survived not only five centuries, but also the leap into
-                                electronic
+                                electronic*/}
+                                {petInfo.description}
               </Typography>
-                            <PetTable />
+                            <PetTable petTraits={petInfo} />
                         </Grid>
                     </Grid>
                 </Box>
