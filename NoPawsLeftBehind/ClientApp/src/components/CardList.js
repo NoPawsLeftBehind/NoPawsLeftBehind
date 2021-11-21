@@ -9,6 +9,7 @@ import Container from "@mui/material/Container";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { pink } from "@mui/material/colors";
 import Favorited from "./Favorited";
+import { Link } from 'react-router-dom';
 
 
 export class CardList extends Component {
@@ -84,8 +85,8 @@ export class CardList extends Component {
                                         >{`Disposition: ${elem.dispositions}`}</Typography>
                                     </CardContent>
                                     <CardActions>
-                                        <Favorited />
-                                        <Button size="small">Page</Button>
+                                        
+                                        <Button component={Link} to={'/pet-profile/' + elem.id } variant="contained" color="primary" size="small">Page</Button>
                                     </CardActions>
                                 </Card>
                             </Grid>

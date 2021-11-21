@@ -28,6 +28,7 @@ export default function App() {
     const { id } = useParams();
     const [petID, setPetID] = React.useState(id);
     const [petInfo, setPetInfo] = React.useState(pet_profile_info)
+    const [validID, getValidID] = React.useState(true)
 
     const getRequest = async () => {
         const response = await fetch('api/animals/' + id);
