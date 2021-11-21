@@ -29,17 +29,19 @@ export default function PetTable({petTraits}) {
     return (
         <TableContainer component={Paper} sx={{ mt: 3 }}>
             <Table aria-label="simple table">
-                <TableHead>
+                <TableHead >
                     <TableRow
                         sx={{
                             bgcolor: "#4a148c"
+
                         }}
                     >
-                        <TableCell sx={{ color: "#f3e5f5" }}>
-                            <h3>Pet Data</h3>
+                        <TableCell sx={{
+                            color: "#f3e5f5", display: 'flex', justifyContent: 'flex-start' }}>
+                            <h3>Pet Traits</h3>
                         </TableCell>
-                        <TableCell sx={{ color: "#f3e5f5" }} align="right">
-                            <h3>Info</h3>
+                        <TableCell sx={{ color: "#f3e5f5" }}>
+                            
                         </TableCell>
                     </TableRow>
                 </TableHead>

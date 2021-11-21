@@ -1,6 +1,7 @@
 ﻿import * as React from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
@@ -29,10 +30,20 @@ export default function App() {
     const [petID, setPetID] = React.useState(id);
     const [petInfo, setPetInfo] = React.useState(pet_profile_info)
     const [validID, getValidID] = React.useState(true)
+    const [isPetProfile, setIsPetProfile] = React.useState(true)
+    const [available, setAvailable] = React.useState(true)
 
     const getRequest = async () => {
+
+        var data
         const response = await fetch('api/animals/' + id);
-        const data = await response.json();
+
+        if (response.status >= 200 && response.status <= 299) {
+            data = await response.json();
+        } else {
+            console.log(response.status, response.statusText);
+            data = {error: response.status}
+        }
         return data
     }
 
@@ -41,12 +52,87 @@ export default function App() {
         getRequest().then(function (result) {
             console.log('get request')
             console.log(result)
+            setIsPetProfile('name' in result)
 
-
-            setPetInfo(result)
+            if ('name' in result) {
+                setAvailable(result.availability == 'Available')
+                setPetInfo(result)
+            }
         });
 
     }, []);
+
+
+
+    const adopt_button = (
+        <Button
+            variant="contained"
+            sx={{ mt: 2, bgcolor: "#4a148c" }}
+            style={{ maxWidth: "70%", mt: 2 }}
+        >
+            Adopt
+        </Button>
+        )
+
+    const pet_profile = (
+        <Grid container spacing={6} display="flex" flexDirection="row" p={3}>
+            <Grid
+                item
+                xs={12}
+                md={4}
+                sm={12}
+                style={{
+                    display: "flex",
+                    flexDirection: "column"
+                }}
+            >
+                <Stack width="100%" display="flex" direction="column"
+                    alignItems="center"
+                      >
+                    <ActionAreaCard availability={petInfo.availability} />
+
+                    {available ? adopt_button : (<div> </div>)}
+                </Stack>
+            </Grid>
+            <Grid
+                item
+                xs={12}
+                md={8}
+                sm={12}
+                style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    justifyContent: "flex-start",
+                    flexDirection: "column"
+                }}
+            >
+                <Typography variant="h3" align="left" mb={2}>
+                    {/*Pet's name*/}
+                    {petInfo.name}
+
+                </Typography>
+                <Typography variant="h5" align="left" mb={1}>
+                    About
+
+                            </Typography>
+                <Typography variant="p" align="left">
+                    {petInfo.description}
+                </Typography>
+                <PetTable petTraits={petInfo} />
+            </Grid>
+        </Grid>
+
+    );
+
+    const no_pet_profile = (
+
+
+        <Typography variant="p" align="center">
+            Pet ID does not exist
+        </Typography>
+        )
+
+
 
     return (
         <div className="App">
@@ -72,61 +158,7 @@ export default function App() {
                         borderRadius: 5
                     }}
                 >
-                    <Grid container spacing={6} display="flex" flexDirection="row" p={3}>
-                        <Grid
-                            item
-                            xs={12}
-                            md={4}
-                            sm={12}
-                            style={{
-                                display: "flex",
-                                flexDirection: "column"
-                            }}
-                        >
-                            <Box width="100%">
-                                <ActionAreaCard availability={petInfo.availability} />
-                                <Button
-                                    variant="contained"
-                                    sx={{ mt: 2, bgcolor: "#4a148c" }}
-                                    style={{ maxWidth: "70%", mt: 2 }}
-                                >
-                                    Adopt
-                </Button>
-                            </Box>
-                        </Grid>
-                        <Grid
-                            item
-                            xs={12}
-                            md={8}
-                            sm={12}
-                            style={{
-                                display: "flex",
-                                alignItems: "flex-start",
-                                justifyContent: "flex-start",
-                                flexDirection: "column"
-                            }}
-                        >
-                            <Typography variant="h3" align="left" mb={2}>
-                                {/*Pet's name*/}
-                                {petInfo.name}
-
-              </Typography>
-                            <Typography variant="h5" align="left" mb={1}>
-                                About
-
-              </Typography>
-                            <Typography variant="p" align="left">
-                                {/*Lorem Ipsum is simply dummy text of the printing and typesetting
-                                industry. Lorem Ipsum has been the industry's standard dummy
-                                text ever since the 1500s, when an unknown printer took a galley
-                                of type and scrambled it to make a type specimen book. It has
-                                survived not only five centuries, but also the leap into
-                                electronic*/}
-                                {petInfo.description}
-              </Typography>
-                            <PetTable petTraits={petInfo} />
-                        </Grid>
-                    </Grid>
+                    {isPetProfile ? pet_profile : no_pet_profile}
                 </Box>
             </Box>
         </div>
