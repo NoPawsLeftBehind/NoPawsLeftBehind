@@ -63,7 +63,7 @@ export class CardList extends Component {
                                         alt="green iguana"
                                         height="150"
                                         sx={{ width: "95%", height: 150, border: 1 }}
-                                        image="https://cdn2.bulbagarden.net/upload/thumb/e/e3/052Meowth-Alola.png/600px-052Meowth-Alola.png"
+                                        image="https://i.imgur.com/aWosUDT.jpg"
                                     />
                                     <CardContent>
                                         <Typography gutterBottom variant="h5" component="div">

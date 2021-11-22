@@ -9,10 +9,10 @@ import Favorited from "./Favorited";
 export default function ActionAreaCard({ availability }) {
 
     const [adoptionStatus, setAdoptionStatus] = React.useState(availability);
+    const [available, setAvailable] = React.useState(true)
 
     React.useEffect(() => {
         console.log(adoptionStatus)
-
         setAdoptionStatus(availability);
     }, [availability]);
 

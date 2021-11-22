@@ -8,7 +8,7 @@ import Dashboard from './components/Dashboard';
 import AddPet from './components/AddPet';
 import FilterPets from './components/FilterPets';
 import { VerifyEmail } from './components/VerifyEmail';
-import '././custom.css';
+import './custom.css';
 import PetProfile from './components/pet_profile/PetProfile';
 
 
