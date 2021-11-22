@@ -7,6 +7,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Favorited from "./Favorited";
+import { Link } from 'react-router-dom';
 
 
 export class CardList extends Component {
@@ -62,7 +63,7 @@ export class CardList extends Component {
                                         alt="green iguana"
                                         height="150"
                                         sx={{ width: "95%", height: 150, border: 1 }}
-                                        image="https://cdn2.bulbagarden.net/upload/thumb/e/e3/052Meowth-Alola.png/600px-052Meowth-Alola.png"
+                                        image="https://i.imgur.com/aWosUDT.jpg"
                                     />
                                     <CardContent>
                                         <Typography gutterBottom variant="h5" component="div">
@@ -82,8 +83,8 @@ export class CardList extends Component {
                                         >{`Disposition: ${elem.dispositions}`}</Typography>
                                     </CardContent>
                                     <CardActions>
-                                        <Favorited />
-                                        <Button size="small">Page</Button>
+                                        
+                                        <Button component={Link} to={'/pet-profile/' + elem.id } variant="contained" color="primary" size="small">Page</Button>
                                     </CardActions>
                                 </Card>
                             </Grid>
