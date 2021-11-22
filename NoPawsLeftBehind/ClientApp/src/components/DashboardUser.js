@@ -3,7 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Paper, Divider, Box } from '@mui/material'
 import DashboardFavoritesList from './DashboardFavoritesList';
 
-const FavoritesList = () => {
+const DashboardUser = () => {
     const { isLoading, user } = useAuth0();
 
     if (isLoading) {
@@ -25,4 +25,4 @@ const FavoritesList = () => {
     );
 };
 
-export default FavoritesList
+export default DashboardUser

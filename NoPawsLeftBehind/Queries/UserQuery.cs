@@ -26,23 +26,30 @@ namespace NoPawsLeftBehind.Queries
             List<User> userList = new List<User>();
 
             using MySqlCommand cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"SELECT `userId`, `email`, `password`, `firstName`, `lastName`, `roleId` FROM `Users`;";
+            cmd.CommandText = @"SELECT `userID`, `email`, `firstName`, `lastName` FROM `Users`;";
 
-            MySqlDataReader reader = await cmd.ExecuteReaderAsync();
-            using (reader)
+            CleanDataHelper cleanDataHelper = new CleanDataHelper();
+
+            try
             {
-                while (await reader.ReadAsync())
+                MySqlDataReader reader = await cmd.ExecuteReaderAsync();
+                using (reader)
                 {
-                    User user = new User();
-                    user.userID = reader.GetInt32(0).ToString();
-                    user.email = reader.GetString(1);
-                    user.password = reader.GetString(2);
-                    user.firstName = reader.GetString(3);
-                    user.lastName = reader.GetString(4);
-                    user.roleId = reader.GetInt32(5).ToString();
+                    while (await reader.ReadAsync())
+                    {
+                        User user = new User();
+                        user.userID = cleanDataHelper.GetCleanString(reader, 0);
+                        user.email = cleanDataHelper.GetCleanString(reader, 1);
+                        user.firstName = cleanDataHelper.GetCleanString(reader, 2);
+                        user.lastName = cleanDataHelper.GetCleanString(reader, 3);
 
-                    userList.Add(user);
-                };
+                        userList.Add(user);
+                    };
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
             }
 
             return userList;
@@ -53,13 +60,14 @@ namespace NoPawsLeftBehind.Queries
             List<User> userList = new List<User>();
 
             using MySqlCommand cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"SELECT `userId`, `email`, `firstName`, `lastName`, `roleId` FROM `Users` WHERE `email` = @email AND `password` = @password;";
+            cmd.CommandText = @"SELECT `userId`, `email`, `firstName`, `lastName` FROM `Users` WHERE `userId` = @userId;";
 
             ApiHelper apiHelper = new ApiHelper();
-            apiHelper.BindStringParam(cmd, Tuple.Create("@email", sEmail));
-            apiHelper.BindStringParam(cmd, Tuple.Create("@password", sPassword));
+            apiHelper.BindStringParam(cmd, Tuple.Create("@userId", sEmail));
 
             await cmd.ExecuteNonQueryAsync();
+
+            CleanDataHelper cleanDataHelper = new CleanDataHelper();
 
             MySqlDataReader reader = await cmd.ExecuteReaderAsync();
             using (reader)
@@ -67,11 +75,10 @@ namespace NoPawsLeftBehind.Queries
                 while (await reader.ReadAsync())
                 {
                     User user = new User();
-                    user.userID = reader.GetInt32(0).ToString();
-                    user.email = reader.GetString(1);
-                    user.firstName = reader.GetString(2);
-                    user.lastName = reader.GetString(3);
-                    user.roleId = reader.GetInt32(4).ToString();
+                    user.userID = cleanDataHelper.GetCleanString(reader, 0);
+                    user.email = cleanDataHelper.GetCleanString(reader, 1);
+                    user.firstName = cleanDataHelper.GetCleanString(reader, 2);
+                    user.lastName = cleanDataHelper.GetCleanString(reader, 3);
 
                     userList.Add(user);
                 };
@@ -86,19 +93,29 @@ namespace NoPawsLeftBehind.Queries
         public async Task InsertAsync(User user)
         {
             using MySqlCommand cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"INSERT INTO `Users` (`Email`, `Password`, `FirstName`, `LastName`, `RoleId`) VALUES " + 
-                "(@email, @password, @firstname, @lastname, @roleid);";
+            cmd.CommandText = @"INSERT INTO `Users` (`userID`, `Email`, `FirstName`, `LastName`) VALUES " +
+                "(@userID, @email, @firstname, @lastname);";
 
             ApiHelper apiHelper = new ApiHelper();
+            apiHelper.BindStringParam(cmd, Tuple.Create("@userID", user.userID));
             apiHelper.BindStringParam(cmd, Tuple.Create("@email", user.email));
-            apiHelper.BindStringParam(cmd, Tuple.Create("@password", user.password));
             apiHelper.BindStringParam(cmd, Tuple.Create("@firstname", user.firstName));
             apiHelper.BindStringParam(cmd, Tuple.Create("@lastname", user.lastName));
-            apiHelper.BindIntParam(cmd, Tuple.Create("@roleid", Int32.Parse(user.roleId)));
 
             await cmd.ExecuteNonQueryAsync();
 
             user.userID = cmd.LastInsertedId.ToString();
+        }
+
+        public async Task<bool> ExistsAsync(string userID)
+        {
+            using MySqlCommand cmd = Db.Connection.CreateCommand();
+            cmd.CommandText = @"SELECT COUNT(*) FROM `Users` WHERE `userID` = @userID;";
+
+            ApiHelper apiHelper = new ApiHelper();
+            apiHelper.BindStringParam(cmd, Tuple.Create("@userID", userID));
+
+            return (long)await cmd.ExecuteScalarAsync() > 0;
         }
     }
 }

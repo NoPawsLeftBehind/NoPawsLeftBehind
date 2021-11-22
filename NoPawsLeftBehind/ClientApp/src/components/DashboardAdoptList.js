@@ -8,25 +8,57 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import { withAuth0 } from '@auth0/auth0-react';
 
-export class DashboardFavoritesList extends Component {
+export class DashboardAdoptList extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { favorites: [], loading: true };
+        this.state = { adoptions: [], loading: true };
     }
 
     componentDidMount() {
-        this.populateFavoritesData();
+        this.populatePendingAdoptionData();
     }
 
-    adopt = async e => {
+    approveAdopt = async e => {
         try {
             const { getAccessTokenSilently } = this.props.auth0;
             const token = await getAccessTokenSilently();
 
             const payload = {
                 animalID: e,
-                status: 'adopt'
+                status: 'approve'
+            }
+
+            const response = await fetch(
+                `api/adoption`,
+                {
+                    method: 'POST',
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload)
+                },
+            );
+
+            const data = await response.json();
+            this.setState({ adoptions: data, loading: false });
+        }
+        catch (error) {
+            console.log(error);
+        }
+
+        this.populatePendingAdoptionData();
+    }
+
+    denyAdopt = async e => {
+        try {
+            const { getAccessTokenSilently } = this.props.auth0;
+            const token = await getAccessTokenSilently();
+
+            const payload = {
+                animalID: e,
+                status: 'deny'
             }
 
             const response = await fetch(
@@ -59,8 +91,8 @@ export class DashboardFavoritesList extends Component {
             name: []
         };
 
-        if (this.state.favorites.length !== 0) {
-            pet_data.name = this.state.favorites
+        if (this.state.adoptions.length !== 0) {
+            pet_data.name = this.state.adoptions
         }
 
         return (
@@ -82,12 +114,12 @@ export class DashboardFavoritesList extends Component {
                                 lg={3}
                                 key={pet_data.name.indexOf(elem)}
                             >
-                                <Card sx={{ maxWidth: 100, m: 1, justfyContent: "center" }}>
+                                <Card sx={{ minWidth: 175, m: 1, justfyContent: "center" }}>
                                     <CardMedia
                                         component="img"
                                         alt="green iguana"
-                                        height="100"
-                                        sx={{ width: "95%", height: 100, border: 1 }}
+                                        height="150"
+                                        sx={{ width: "95%", height: 150, border: 1 }}
                                         image="https://cdn2.bulbagarden.net/upload/thumb/e/e3/052Meowth-Alola.png/600px-052Meowth-Alola.png"
                                     />
                                     <CardContent>
@@ -96,7 +128,8 @@ export class DashboardFavoritesList extends Component {
                                         </Typography>
                                     </CardContent>
                                     <CardActions sx={{ justifyContent: "center" }}>
-                                        <Button size="small" onClick={e => this.adopt(`${elem.id}`)}>Adopt</Button>
+                                        <Button size="small" onClick={e => this.approveAdopt(`${elem.id}`)}>Approve</Button>
+                                        <Button size="small" onClick={e => this.denyAdopt(`${elem.id}`)} > Deny</Button>
                                     </CardActions>
                                 </Card>
                             </Grid>
@@ -107,13 +140,13 @@ export class DashboardFavoritesList extends Component {
         );
     }
 
-    async populateFavoritesData() {
+    async populatePendingAdoptionData() {
         try {
             const { getAccessTokenSilently } = this.props.auth0;
             const token = await getAccessTokenSilently();
 
             const response = await fetch(
-                `api/favorite`,
+                `api/adoption`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -123,7 +156,7 @@ export class DashboardFavoritesList extends Component {
             );
 
             const data = await response.json();
-            this.setState({ favorites: data, loading: false });
+            this.setState({ adoptions: data, loading: false });
         }
         catch (error) {
             console.log(error);
@@ -131,4 +164,4 @@ export class DashboardFavoritesList extends Component {
     }
 }
 
-export default withAuth0(DashboardFavoritesList);
+export default withAuth0(DashboardAdoptList);

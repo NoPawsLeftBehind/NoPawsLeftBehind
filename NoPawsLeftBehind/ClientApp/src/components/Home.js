@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Paper, Divider, Stack, Grid } from '@mui/material'
+import { Paper, Divider, Stack, Grid, Toolbar } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles';
 import Pup from "../images/pup-flower.jpg";
 import '../style/Home.css';
@@ -12,6 +12,7 @@ export class Home extends Component {
         return (
             <ThemeProvider theme={appTheme}>
                 <div id="mainDiv">
+                    <Toolbar />
                     <Grid container spacing={3} justify="space-evenly" alignItems="center" style={{ flexGrow: 1 }}>
                         <Grid item xs={12} sm={6} justify="center">
                             <Paper elevation={3} id="img-paper">
