@@ -106,16 +106,16 @@ export default function App() {
                     flexDirection: "column"
                 }}
             >
-                <Typography variant="h3" align="left" mb={2}>
+                <Typography color="#000000" variant="h3" align="left" mb={2}>
                     {/*Pet's name*/}
                     {petInfo.name}
 
                 </Typography>
-                <Typography variant="h5" align="left" mb={1}>
+                <Typography color="#000000" variant="h5" align="left" mb={1}>
                     About
 
-                            </Typography>
-                <Typography variant="p" align="left">
+                </Typography>
+                <Typography color="#000000" variant="p" align="left">
                     {petInfo.description}
                 </Typography>
                 <PetTable petTraits={petInfo} />
@@ -127,7 +127,7 @@ export default function App() {
     const no_pet_profile = (
 
 
-        <Typography variant="p" align="center">
+        <Typography color="#000000" variant="p" align="center">
             Pet ID does not exist
         </Typography>
         )
