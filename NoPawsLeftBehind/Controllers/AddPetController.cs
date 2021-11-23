@@ -31,6 +31,15 @@ namespace NoPawsLeftBehind.Controllers
             BreedQuery breedQuery = new BreedQuery(Db);
             List<Breed> breedResult = await breedQuery.AllBreedsAsync();
 
+            SexQuery sexQuery = new SexQuery(Db);
+            List<Sex> sexResult = await sexQuery.AllSexesAsync();
+
+            AvailabilityQuery availQuery = new AvailabilityQuery(Db);
+            List<Availability> availResult = await availQuery.AllAvailabilitiesAsync();
+
+            ColorQuery colorQuery = new ColorQuery(Db);
+            List<Color> colorResult = await colorQuery.AllColorsAsync();
+
             DispositionQuery dispoQuery = new DispositionQuery(Db);
             List<Disposition> dispoResult = await dispoQuery.AllDispositionsAsync();
 
@@ -38,6 +47,9 @@ namespace NoPawsLeftBehind.Controllers
 
             formOptions.AnimalTypes = typeResult;
             formOptions.Breeds = breedResult;
+            formOptions.Sexes = sexResult;
+            formOptions.Availabilities = availResult;
+            formOptions.Colors = colorResult;
             formOptions.Dispositions = dispoResult;
 
             return new OkObjectResult(formOptions);
