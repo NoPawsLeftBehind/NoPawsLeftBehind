@@ -12,9 +12,9 @@ namespace NoPawsLeftBehind.Controllers
 {
     [ApiController]
     [Route("api/AddAnimal")]
-    public class AddAnimalController : ControllerBase
+    public class AddPetController : ControllerBase
     {
-        public AddAnimalController(AppDb db)
+        public AddPetController(AppDb db)
         {
             Db = db;
         }
@@ -22,7 +22,7 @@ namespace NoPawsLeftBehind.Controllers
         public AppDb Db { get; }
 
         [HttpGet]
-        public async Task<IActionResult> GetFilterOptions()
+        public async Task<IActionResult> GetAddAnimalOptions()
         {
             await Db.Connection.OpenAsync();
             AnimalTypeQuery typeQuery = new AnimalTypeQuery(Db);
@@ -34,24 +34,13 @@ namespace NoPawsLeftBehind.Controllers
             DispositionQuery dispoQuery = new DispositionQuery(Db);
             List<Disposition> dispoResult = await dispoQuery.AllDispositionsAsync();
 
-            FilterOptions filterOptions = new FilterOptions();
+            AddPetOptions formOptions = new AddPetOptions();
 
-            filterOptions.AnimalTypes = typeResult;
-            filterOptions.Breeds = breedResult;
-            filterOptions.Dispositions = dispoResult;
+            formOptions.AnimalTypes = typeResult;
+            formOptions.Breeds = breedResult;
+            formOptions.Dispositions = dispoResult;
 
-            return new OkObjectResult(filterOptions);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> PostFilterResults([FromBody] FilterChoices choices)
-        {
-            await Db.Connection.OpenAsync();
-
-            AnimalQuery animalQuery = new AnimalQuery(Db);
-            var result = await animalQuery.SearchAnimalsAsync(choices);
-
-            return new OkObjectResult(result);
+            return new OkObjectResult(formOptions);
         }
     }
 }
