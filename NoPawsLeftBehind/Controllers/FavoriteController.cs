@@ -55,6 +55,7 @@ namespace NoPawsLeftBehind.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> UpdateFavorite([FromBody] int animalId)
         {
             await Db.Connection.OpenAsync();

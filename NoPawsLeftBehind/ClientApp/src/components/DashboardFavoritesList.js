@@ -52,15 +52,12 @@ export class DashboardFavoritesList extends Component {
     }
 
     render() {
-        console.log(this.state);
-        console.log(this.props);
-
         let pet_data = {
             name: []
         };
 
         if (this.state.favorites.length !== 0) {
-            pet_data.name = this.state.favorites
+            pet_data.name = this.state.favorites;
         }
 
         return (

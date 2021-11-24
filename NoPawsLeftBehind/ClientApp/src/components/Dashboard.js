@@ -45,7 +45,6 @@ class Dashboard extends Component {
                             </Grid>
                         </Stack>
                     </div>
-
                 </ThemeProvider>
             )
         );

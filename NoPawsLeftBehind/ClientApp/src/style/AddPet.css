@@ -1,0 +1,40 @@
+﻿#img-paper-add {
+    height: 50vh;
+    width: 50vh;
+    margin:2vh;
+}
+
+#img-box {
+    display: flex;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+
+#img-add {
+    max-height: 100%;
+    max-width: 100%;
+    margin: auto;
+    vertical-align: middle;
+}
+
+.img-grid {
+    text-align: center;
+    align-items: center;
+}
+
+.icon {
+    vertical-align: middle;
+    margin: auto;
+}
+
+.form-margins{
+    margin: 1vh;
+}
+
+.landing-text {
+    line-height: 4vh;
+    text-align: center;
+    min-width: 360px;
+    align-items: center;
+}
