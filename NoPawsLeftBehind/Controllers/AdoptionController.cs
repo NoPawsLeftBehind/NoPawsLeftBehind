@@ -63,7 +63,7 @@ namespace NoPawsLeftBehind.Controllers
         }
 
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> UpdateAdoptionStatus([FromBody] AdoptionStatus adoptionStatus)
         {
             await Db.Connection.OpenAsync();

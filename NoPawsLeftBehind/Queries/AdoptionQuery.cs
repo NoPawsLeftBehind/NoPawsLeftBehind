@@ -69,14 +69,12 @@ namespace NoPawsLeftBehind.Queries
         {
             using var cmd = Db.Connection.CreateCommand();
             cmd.CommandText = @"UPDATE Animals
-                                SET availabilityID = (SELECT availabilityID FROM Availability WHERE availability = '@avail')
+                                SET availabilityID = (SELECT availabilityID FROM Availability WHERE availability = @avail)
                                 WHERE animalID = @id;";
 
             ApiHelper apiHelper = new ApiHelper();
             apiHelper.BindStringParam(cmd, Tuple.Create("@avail", avail));
             apiHelper.BindIntParam(cmd, Tuple.Create("@id", animalID));
-
-            Console.WriteLine(cmd.CommandText);
 
             await cmd.ExecuteNonQueryAsync();
         }
