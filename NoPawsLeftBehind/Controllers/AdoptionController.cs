@@ -71,9 +71,26 @@ namespace NoPawsLeftBehind.Controllers
             Console.WriteLine(adoptionStatus.AnimalId);
             Console.WriteLine(adoptionStatus.Status);
 
-            // TODO
+            AdoptionQuery updQuery = new AdoptionQuery(Db);
+
+            if (adoptionStatus.Status == "approve")
+            {
+                await updQuery.updateAvail(adoptionStatus.AnimalId, "Adopted");
+            }
+            else if (adoptionStatus.Status == "deny")
+            {
+                await updQuery.updateAvail(adoptionStatus.AnimalId, "Available");
+            }
+            else if (adoptionStatus.Status == "adopt")
+            {
+                await updQuery.updateAvail(adoptionStatus.AnimalId, "Pending");
+            }
+            else
+            {
+                return new ObjectResult("No availability status to update.");
+            }
             
-            return new ObjectResult("Method not implemented!");
+            return new ObjectResult("Availability Updated!");
         }
     }
 }
