@@ -7,7 +7,7 @@ namespace NoPawsLeftBehind.Models
 {
     public class AdoptionStatus
     {
-        public string AnimalId { get; set; }
+        public int AnimalId { get; set; }
         public string Status { get; set; }
     }
 }
