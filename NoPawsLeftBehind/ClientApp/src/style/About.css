@@ -1,13 +1,6 @@
-﻿#img-paper-about {
-    height: 40vh;
-    width: 50vh;
-    margin: 3vh;
-}
-
-#img-stack {
+﻿#img-container {
     text-align: center;
-    height: 100%;
-    width: 100%;
+    max-width: 90vh;
 }
 
 #aboutDiv {
@@ -17,17 +10,18 @@
     align-items: center;
 }
 
-.img-about {
-    max-height: 100%;
+#img-about {
     max-width: 100%;
-    margin: auto;
+    height: auto;
+    width: auto;
     vertical-align: middle;
 }
 
-.about-text {
+#about-text {
     line-height: 4vh;
-    text-align: center;
-    min-width: 360px;
+    text-align: justify;
+    max-width: 90vh;
+    min-width: 50vh;
     align-items: center;
 }
 
