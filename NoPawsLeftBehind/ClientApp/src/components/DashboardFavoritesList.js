@@ -52,15 +52,12 @@ export class DashboardFavoritesList extends Component {
     }
 
     render() {
-        console.log(this.state);
-        console.log(this.props);
-
         let pet_data = {
             name: []
         };
 
         if (this.state.favorites.length !== 0) {
-            pet_data.name = this.state.favorites
+            pet_data.name = this.state.favorites;
         }
 
         return (
@@ -77,18 +74,18 @@ export class DashboardFavoritesList extends Component {
                             <Grid
                                 item
                                 xs={12}
-                                sm={6}
-                                md={4}
-                                lg={3}
+                                sm={12}
+                                md={7}
+                                lg={6}
                                 key={pet_data.name.indexOf(elem)}
                             >
-                                <Card sx={{ maxWidth: 100, m: 1, justfyContent: "center" }}>
+                                <Card sx={{ maxWidth: 150, m: 2, justfyContent: "center" }}>
                                     <CardMedia
                                         component="img"
                                         alt="green iguana"
-                                        height="100"
-                                        sx={{ width: "95%", height: 100, border: 1 }}
-                                        image="https://cdn2.bulbagarden.net/upload/thumb/e/e3/052Meowth-Alola.png/600px-052Meowth-Alola.png"
+                                        height="150"
+                                        sx={{ width: "95%", height: 150, border: 1 }}
+                                        image={`${elem.picture}`}
                                     />
                                     <CardContent>
                                         <Typography variant="h6" component="div">

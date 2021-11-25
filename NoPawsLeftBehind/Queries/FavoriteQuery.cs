@@ -57,7 +57,7 @@ namespace NoPawsLeftBehind.Queries
                     animal.Availability = cleanDataHelper.GetCleanString(reader, 6);
                     animal.Age = cleanDataHelper.GetCleanInt(reader, 7);
                     animal.Weight = cleanDataHelper.GetCleanInt(reader, 8);
-                    animal.Color = cleanDataHelper.GetCleanString(reader, 8);
+                    animal.Color = cleanDataHelper.GetCleanString(reader, 9);
                     animal.Description = cleanDataHelper.GetCleanString(reader, 10);
                     animal.News = cleanDataHelper.GetCleanString(reader, 11);
                     animal.DateCreated = reader.GetDateTime(12);
@@ -96,7 +96,7 @@ namespace NoPawsLeftBehind.Queries
         public async Task<bool> ExistsAsync(string userID, int animalID)
         {
             using MySqlCommand cmd = Db.Connection.CreateCommand();
-            cmd.CommandText = @"SELECT COUNT(*) FROM `Users_Animals` WHERE `userID` = @userID AND `animalID` = @animalID);";
+            cmd.CommandText = @"SELECT COUNT(*) FROM `Users_Animals` WHERE `userID` = @userID AND `animalID` = @animalID;";
 
             ApiHelper apiHelper = new ApiHelper();
             apiHelper.BindStringParam(cmd, Tuple.Create("@userID", userID));
