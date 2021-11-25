@@ -84,9 +84,6 @@ export class DashboardAdoptList extends Component {
     }
 
     render() {
-        console.log(this.state);
-        console.log(this.props);
-
         let pet_data = {
             name: []
         };
@@ -109,18 +106,18 @@ export class DashboardAdoptList extends Component {
                             <Grid
                                 item
                                 xs={12}
-                                sm={6}
-                                md={4}
-                                lg={3}
+                                sm={12}
+                                md={7}
+                                lg={6}
                                 key={pet_data.name.indexOf(elem)}
                             >
-                                <Card sx={{ minWidth: 175, m: 1, justfyContent: "center" }}>
+                                <Card sx={{ minWidth: 150, m: 2, justfyContent: "center" }}>
                                     <CardMedia
                                         component="img"
                                         alt="green iguana"
                                         height="150"
                                         sx={{ width: "95%", height: 150, border: 1 }}
-                                        image="https://cdn2.bulbagarden.net/upload/thumb/e/e3/052Meowth-Alola.png/600px-052Meowth-Alola.png"
+                                        image={`${elem.picture}`}
                                     />
                                     <CardContent>
                                         <Typography variant="h6" component="div">
@@ -128,8 +125,8 @@ export class DashboardAdoptList extends Component {
                                         </Typography>
                                     </CardContent>
                                     <CardActions sx={{ justifyContent: "center" }}>
-                                        <Button size="small" onClick={e => this.approveAdopt(`${elem.id}`)}>Approve</Button>
-                                        <Button size="small" onClick={e => this.denyAdopt(`${elem.id}`)} > Deny</Button>
+                                        <Button size="small" variant="contained" onClick={e => this.approveAdopt(`${elem.id}`)}>Approve</Button>
+                                        <Button size="small" variant="outlined" onClick={e => this.denyAdopt(`${elem.id}`)} > Deny</Button>
                                     </CardActions>
                                 </Card>
                             </Grid>

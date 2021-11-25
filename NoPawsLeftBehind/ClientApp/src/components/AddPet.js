@@ -1,5 +1,5 @@
 ﻿import React, { Component } from "react";
-import { Container, Grid, Button, Paper, Box, Toolbar, Select, MenuItem, InputLabel, FormControl, OutlinedInput, } from "@mui/material";
+import { Container, Grid, Button, Paper, Box, Toolbar, Select, MenuItem, InputLabel, FormControl, OutlinedInput, Stack } from "@mui/material";
 import { ThemeProvider } from '@mui/material/styles';
 import InsertPhotoOutlinedIcon from '@mui/icons-material/InsertPhotoOutlined';
 import { withAuth0 } from '@auth0/auth0-react';
@@ -184,7 +184,7 @@ export class AddPet extends Component {
                 picture: this.state.picture,
                 type: this.state.type,
                 breed: this.state.breed,
-                gender: this.state.sex,
+                sex: this.state.sex,
                 availability: this.state.availability,
                 age: this.state.age,
                 weight: this.state.weight,
@@ -226,7 +226,6 @@ export class AddPet extends Component {
 
         if (this.state.attributes) {
             attribute_data = this.state.attributes;
-            /*console.log(attribute_data)*/
         }
 
         return (
@@ -316,8 +315,8 @@ export class AddPet extends Component {
                                             label="Sex"
                                             onChange={this.handleSexChange}
                                         >
-                                            {attribute_data.genders && attribute_data.genders.map((item) =>
-                                                <MenuItem key={item.genderID} value={item.genderID}>{item.gender}</MenuItem>
+                                            {attribute_data.sexes && attribute_data.sexes.map((item) =>
+                                                <MenuItem key={item.sexID} value={item.sexID}>{item.sex}</MenuItem>
                                             )}
                                         </Select>
                                     </FormControl>
@@ -398,7 +397,9 @@ export class AddPet extends Component {
                                             label="News"
                                         />
                                     </FormControl>
-                                    <Button variant='contained' className="form-margins" onClick={this.createPetProfile}>Create</Button>
+                                    <Stack my={1} mx={10} justifyContent="center">
+                                        <Button variant='contained' className="form-margins" onClick={this.createPetProfile}>Create</Button>
+                                    </Stack>
                                 </Box>
                             </Grid>
                         </Grid>
@@ -414,7 +415,7 @@ export class AddPet extends Component {
             const token = await getAccessTokenSilently();
 
             const response = await fetch(
-                `api/FilterOptions`,
+                `api/AddAnimal`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,

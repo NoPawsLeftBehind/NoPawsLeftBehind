@@ -8,7 +8,10 @@ namespace NoPawsLeftBehind.Controllers
     {
         protected string GetUserId()
         {
-            return this.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            if (this.User.Identity.IsAuthenticated)
+                return this.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            else
+                return null;
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 using NoPawsLeftBehind.Database;
@@ -12,7 +13,7 @@ namespace NoPawsLeftBehind.Controllers
 {
     [ApiController]
     [Route("api/Animals")]
-    public class AnimalController : ControllerBase
+    public class AnimalController : BaseController
     {
         public AnimalController(AppDb db)
         {
@@ -43,6 +44,16 @@ namespace NoPawsLeftBehind.Controllers
             animalResult.Dispositions = dispoResult;
 
             return new OkObjectResult(animalResult);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> CreateAnimal([FromBody]CreateAnimal animal)
+        {
+            await Db.Connection.OpenAsync();
+            Console.WriteLine(animal);
+
+            return new OkObjectResult(animal);
         }
     }
 }

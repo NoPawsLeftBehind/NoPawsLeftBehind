@@ -54,9 +54,9 @@ namespace NoPawsLeftBehind.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("update")]
         [Authorize]
-        public async Task<IActionResult> UpdateFavorite([FromBody] int animalId)
+        public async Task<IActionResult> UpdateFavorite([FromBody] FavoriteAnimal favAnimal)
         {
             await Db.Connection.OpenAsync();
 
@@ -65,12 +65,34 @@ namespace NoPawsLeftBehind.Controllers
             {
                 string userId = GetUserId();
 
-                if (await favoriteQuery.ExistsAsync(userId, animalId))
-                    await favoriteQuery.DeleteAsync(userId, animalId);
+                if (await favoriteQuery.ExistsAsync(userId, favAnimal.AnimalID))
+                    await favoriteQuery.DeleteAsync(userId, favAnimal.AnimalID);
                 else
-                    await favoriteQuery.InsertAsync(userId, animalId);
+                    await favoriteQuery.InsertAsync(userId, favAnimal.AnimalID);
 
                 return new OkObjectResult("Favorite added.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return new ObjectResult(ex);
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> FavoriteExists([FromBody] FavoriteAnimal favAnimal)
+        {
+            await Db.Connection.OpenAsync();
+
+            FavoriteQuery favoriteQuery = new FavoriteQuery(Db);
+            try
+            {
+                string userId = GetUserId();
+
+                bool bIsFavorite = await favoriteQuery.ExistsAsync(userId, favAnimal.AnimalID);
+
+                return new OkObjectResult(bIsFavorite);
             }
             catch (Exception ex)
             {
