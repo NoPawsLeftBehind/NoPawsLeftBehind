@@ -1,0 +1,61 @@
+﻿#img-paper-about {
+    height: 40vh;
+    width: 50vh;
+    margin: 3vh;
+}
+
+#img-stack {
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+
+#aboutDiv {
+    padding: 5vh 0;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-about {
+    max-height: 100%;
+    max-width: 100%;
+    margin: auto;
+    vertical-align: middle;
+}
+
+.about-text {
+    line-height: 4vh;
+    text-align: center;
+    min-width: 360px;
+    align-items: center;
+}
+
+h2 {
+    font-family: "Raleway", sans-serif;
+    position: relative;
+    margin-bottom: 1vh;
+    padding-bottom: 1vh;
+    text-align: center;
+}
+
+h3 {
+    font-family: "Raleway", sans-serif;
+    position: relative;
+    margin-bottom: 1vh;
+    padding-bottom: 1vh;
+    text-align: center;
+}
+
+p {
+    margin: 5vh;
+}
+
+body,
+html {
+    font-family: "Open Sans", sans-serif;
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+    color: #777;
+    font-weight: 400;
+}
