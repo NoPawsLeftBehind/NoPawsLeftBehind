@@ -63,6 +63,7 @@ export default function App() {
     
     const adoptionRequest = async function postRequest() {
 
+        var data
         const token = await auth0_obj.getAccessTokenSilently()
 
         console.log(token)
@@ -72,37 +73,29 @@ export default function App() {
             Status: 'adopt'
         }
 
-        /*
+        
 
         const response = await fetch('api/Adoption',
             {
                 method: 'POST',
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(payload)
             },
-        );
-        */
+        ).then((response) => {
 
-        const response = await fetch('api/Adoption', {
-            method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            },
-            redirect: 'follow',
-            referrerPolicy: 'no-referrer',
-            body: JSON.stringify(payload)
+            data = response
+            console.log(response);
         });
 
-        const data = await response.json();
-        console.log('test50')
-        return data
+        
+        console.log('hello_world')
+        console.log(data)
+        
+
+
 
         
     }
@@ -130,11 +123,7 @@ export default function App() {
             sx={{ mt: 2, bgcolor: "#4a148c" }}
             style={{ maxWidth: "70%", mt: 2 }}
             onClick={() => {
-                adoptionRequest().then(function (result) {
-                    console.log('hello')
-                    
-
-                })
+                adoptionRequest()
             }}
         >
             Adopt
@@ -158,7 +147,7 @@ export default function App() {
                       >
                     <ActionAreaCard availability={petInfo.availability} auth0_obj={auth0_obj} id={id} />
 
-                    {showButton ? adopt_button : (<div> </div>)}
+                    {true ? adopt_button : (<div> </div>)}
                 </Stack>
             </Grid>
             <Grid

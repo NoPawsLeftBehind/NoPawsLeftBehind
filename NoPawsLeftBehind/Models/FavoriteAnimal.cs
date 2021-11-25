@@ -5,9 +5,13 @@ using System.Threading.Tasks;
 
 namespace NoPawsLeftBehind.Models
 {
-    public class AdoptionStatus
+    public class FavoriteAnimal
     {
-        public int AnimalId { get; set; }
-        public string Status { get; set; }
+        public FavoriteAnimal()
+        {
+
+        }
+
+        public int AnimalID { get; set; }
     }
 }

@@ -11,13 +11,14 @@ export default function Favorited({ auth0_obj, id }) {
 
     const getFavoritedStatus = async function getFavorited() {
 
+        var data
         const token = await auth0_obj.getAccessTokenSilently()
 
         const payload = {
             AnimalID: id
         }
 
-        const response = await fetch(
+        const response = fetch(
             `api/favorite`,
             {
                 method: 'POST',
@@ -27,18 +28,34 @@ export default function Favorited({ auth0_obj, id }) {
                 },
                 body: JSON.stringify(payload)
             },
-        );
+        ).then((response) => {
 
-        const data = await response.json();
-        return data
+            data = response.json()
+            data.then((body) => {
+
+                console.log(body)
+
+                setSelected(body)
+
+            });
+
+            
+           
+            
+        });
+
+        
+
     }
 
     const updateFavoritedStatus = async function updateFavorited(s) {
 
+        var data
         const token = await auth0_obj.getAccessTokenSilently()
+        console.log(s)
 
         const payload = {
-            petID: id,
+            AnimalID: id,
             status: s
         }
 
@@ -52,23 +69,38 @@ export default function Favorited({ auth0_obj, id }) {
                 },
                 body: JSON.stringify(payload)
             },
-        );
+        ).then((response) => {
 
-        const data = await response.json();
+            data = response
+            console.log(response);
+        });
+
         console.log(data)
     }
 
     React.useEffect(() => {
-
+        console.log('testing 123')
         if (auth0_obj.isAuthenticated == true) {
 
-            getFavoritedStatus().then(function (result) {
-                setSelected(result);
-            });
+            console.log(getFavoritedStatus())
         }
 
     }, []);
 
+    if (auth0_obj.isAuthenticated == true) {
+
+
+        /*
+        getFavoritedStatus().then((response) => {
+
+            var data = response
+            return (data)
+
+        });
+        */
+
+        getFavoritedStatus()
+    }
 
     return (
         <Box
