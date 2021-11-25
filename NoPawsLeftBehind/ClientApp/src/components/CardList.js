@@ -63,7 +63,7 @@ export class CardList extends Component {
                                         alt="green iguana"
                                         height="150"
                                         sx={{ width: "95%", height: 150, border: 1 }}
-                                        image="https://i.imgur.com/aWosUDT.jpg"
+                                        image="https://i.imgur.com/OgFgez7.jpg"
                                     />
                                     <CardContent>
                                         <Typography gutterBottom variant="h5" component="div">
@@ -80,7 +80,7 @@ export class CardList extends Component {
                                         <Typography
                                             variant="body1"
                                             color="text.secondary"
-                                        >{`Disposition: ${elem.dispositions}`}</Typography>
+                                        >{`Age: ${elem.age}`}</Typography>
                                     </CardContent>
                                     <CardActions>
                                         

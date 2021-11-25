@@ -123,7 +123,8 @@ export default function FilterPets(props) {
     const initialValues = {
         type: "",
         breed: "",
-        disposition: ""
+        disposition: "",
+        dateCreated: ""
     };
 
     const onSubmit = (values) => {
@@ -132,7 +133,13 @@ export default function FilterPets(props) {
             AnimalType: values.type,
             Breed: values.breed,
             Disposition: values.disposition
+
+
         }
+
+
+        console.log('test30')
+        console.log(values.dateCreated)
         console.log(values_submit)
         // Make a post request based on filter parameters
 
@@ -145,6 +152,11 @@ export default function FilterPets(props) {
 
             if (result.animals == 0) {
                 result = sample
+            }
+            else if (values.dateCreated == 1) {
+
+                result.animals.sort((a, b) => b.dateCreated - a.dateCreated)
+                result.animals.reverse()
             }
 
             setFilterResults(result)
@@ -169,14 +181,14 @@ export default function FilterPets(props) {
                                         htmlFor="uncontrolled-native"
                                     >
                                         Type
-                  </InputLabel>
+                                    </InputLabel>
                                     <NativeSelect
-                                        defaultValue={30}
+                                        defaultValue={'hello_world'}
                                         onChange={handleChange}
                                         name="type"
                                         id="type"
                                     >
-                                        <option value={"None"}>None</option>
+                                        <option value={''}>None</option>
                                         {filter_payload.type.map((item) => (
                                             <option value={item}>{item}</option>
                                         ))}
@@ -184,16 +196,16 @@ export default function FilterPets(props) {
                                 </FormControl>
 
                                 <FormControl fullWidth>
-                                    <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                                    <InputLabel variant="standard" shrink={true} htmlFor="uncontrolled-native">
                                         Breed
-                  </InputLabel>
+                                    </InputLabel>
                                     <NativeSelect
-                                        defaultValue={30}
+                                        defaultValue={'hello_world'}
                                         onChange={handleChange}
                                         name="breed"
                                         id="breed"
                                     >
-                                        <option value={"None"}>None</option>
+                                        <option value={''}>None</option>
                                         {filter_payload.breed.map((item) => (
                                             <option value={item}>{item}</option>
                                         ))}
@@ -201,19 +213,39 @@ export default function FilterPets(props) {
                                 </FormControl>
 
                                 <FormControl fullWidth>
-                                    <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                                    <InputLabel variant="standard" shrink={true} htmlFor="uncontrolled-native">
                                         Disposition
-                  </InputLabel>
+                                </InputLabel>
                                     <NativeSelect
-                                        defaultValue={30}
+                                        defaultValue={''}
                                         onChange={handleChange}
                                         name="disposition"
                                         id="disposition"
                                     >
-                                        <option value={"None"}>None</option>
+                                        <option value={''}>None</option>
                                         {filter_payload.disposition.map((item) => (
                                             <option value={item}>{item}</option>
                                         ))}
+                                    </NativeSelect>
+                                </FormControl>
+
+                                <FormControl>
+                                    <InputLabel
+                                        variant="standard"
+                                        shrink={true}
+                                        htmlFor="uncontrolled-native"
+                                    >
+                                        Date Created
+                                    </InputLabel>
+                                    <NativeSelect
+                                        defaultValue={''}
+                                        onChange={handleChange}
+                                        name="dateCreated"
+                                        id="dateCreated"
+                                    >
+                                        <option value={''}>None</option>
+                                            <option value={0}>{'newest to oldest'}</option>
+                                            <option value={1}>{'oldest to newest'}</option>
                                     </NativeSelect>
                                 </FormControl>
 

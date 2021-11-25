@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import Favorited from "./Favorited";
 
-export default function ActionAreaCard({ availability }) {
+export default function ActionAreaCard({ availability, auth0_obj, id}) {
 
     const [adoptionStatus, setAdoptionStatus] = React.useState(availability);
     const [available, setAvailable] = React.useState(true)
@@ -31,7 +31,7 @@ export default function ActionAreaCard({ availability }) {
                         Status: {adoptionStatus}
           </Typography>
 
-                    <Favorited />
+                    <Favorited auth0_obj={auth0_obj} id={id} />
                 </CardContent>
             </CardActionArea>
         </Card>

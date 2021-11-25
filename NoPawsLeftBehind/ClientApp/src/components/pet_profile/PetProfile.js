@@ -12,6 +12,7 @@ import PetTable from "./PetTable";
 import Toolbar from "@mui/material/Toolbar";
 import "./styles.css";
 import { useParams } from "react-router-dom";
+import { useAuth0 } from '@auth0/auth0-react';
 
 var pet_profile_info = {
     name: 'none',
@@ -29,13 +30,25 @@ export default function App() {
     const { id } = useParams();
     const [petID, setPetID] = React.useState(id);
     const [petInfo, setPetInfo] = React.useState(pet_profile_info)
-    const [validID, getValidID] = React.useState(true)
     const [isPetProfile, setIsPetProfile] = React.useState(true)
-    const [available, setAvailable] = React.useState(true)
+    const [isUserLogged, setisUserLogged] = React.useState(false)
 
+    const auth0_obj = useAuth0();
+    console.log(auth0_obj)
+
+    var showButton = false
+    var favorited = false
+
+
+    if (petInfo.availability == 'Available' && auth0_obj.isAuthenticated == true) {
+        showButton = true
+
+    }
+
+    
     const getRequest = async () => {
 
-        var data
+        var data = ''
         const response = await fetch('api/animals/' + id);
 
         if (response.status >= 200 && response.status <= 299) {
@@ -47,15 +60,62 @@ export default function App() {
         return data
     }
 
+    
+    const adoptionRequest = async function postRequest() {
+
+        const token = await auth0_obj.getAccessTokenSilently()
+
+        console.log(token)
+
+        const payload = {
+            AnimalID: String(id),
+            Status: 'adopt'
+        }
+
+        /*
+
+        const response = await fetch('api/Adoption',
+            {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload)
+            },
+        );
+        */
+
+        const response = await fetch('api/Adoption', {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            redirect: 'follow',
+            referrerPolicy: 'no-referrer',
+            body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+        console.log('test50')
+        return data
+
+        
+    }
+    
+
     React.useEffect(() => {
 
         getRequest().then(function (result) {
-            console.log('get request')
             console.log(result)
             setIsPetProfile('name' in result)
 
             if ('name' in result) {
-                setAvailable(result.availability == 'Available')
+                
                 setPetInfo(result)
             }
         });
@@ -69,6 +129,13 @@ export default function App() {
             variant="contained"
             sx={{ mt: 2, bgcolor: "#4a148c" }}
             style={{ maxWidth: "70%", mt: 2 }}
+            onClick={() => {
+                adoptionRequest().then(function (result) {
+                    console.log('hello')
+                    
+
+                })
+            }}
         >
             Adopt
         </Button>
@@ -89,9 +156,9 @@ export default function App() {
                 <Stack width="100%" display="flex" direction="column"
                     alignItems="center"
                       >
-                    <ActionAreaCard availability={petInfo.availability} />
+                    <ActionAreaCard availability={petInfo.availability} auth0_obj={auth0_obj} id={id} />
 
-                    {available ? adopt_button : (<div> </div>)}
+                    {showButton ? adopt_button : (<div> </div>)}
                 </Stack>
             </Grid>
             <Grid
@@ -113,10 +180,11 @@ export default function App() {
                 </Typography>
                 <Typography color="#000000" variant="h5" align="left" mb={1}>
                     About
-
+                     
                 </Typography>
                 <Typography color="#000000" variant="p" align="left">
                     {petInfo.description}
+
                 </Typography>
                 <PetTable petTraits={petInfo} />
             </Grid>
