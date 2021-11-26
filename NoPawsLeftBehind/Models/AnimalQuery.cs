@@ -43,7 +43,8 @@ namespace NoPawsLeftBehind.Models
                                 LEFT JOIN Genders g ON a.genderID = g.genderID
                                 LEFT JOIN Availability av on a.availabilityID = av.availabilityID
                                 LEFT JOIN Colors c on a.colorID = c.colorID
-                                WHERE av.availability != 'Adopted';";
+                                WHERE av.availability != 'Adopted'
+                                ORDER BY dateCreated DESC;";
 
             return await ReadAllAsync(await cmd.ExecuteReaderAsync());
         }
@@ -111,7 +112,8 @@ namespace NoPawsLeftBehind.Models
                                                                             WHERE ad.animalID = a.animalID)";
             }
 
-            cmd.CommandText = cmd.CommandText + Environment.NewLine + @"AND av.availability != 'Adopted';";
+            cmd.CommandText = cmd.CommandText + Environment.NewLine + @"AND av.availability != 'Adopted'
+                                                                        ORDER BY dateCreated DESC;";
 
             //Bind parameters
             ApiHelper apiHelper = new ApiHelper();
