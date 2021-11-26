@@ -15,7 +15,7 @@ export class About extends Component {
                         <Grid item xs={12} sm={12}>
                             <Container id="about-text">
                                 <h2>About Us</h2>
-                                <Divider />
+                                <Divider/>
                                 <p>
                                     No Paws Left Behind is a Non-Profit Organization with the singular goal of matching pets
                                     with prospective pet owners. We partner with animal shelters across the country to host

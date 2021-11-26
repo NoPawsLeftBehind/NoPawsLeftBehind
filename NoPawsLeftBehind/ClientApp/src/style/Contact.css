@@ -1,41 +1,29 @@
-﻿#img-paper-add {
-    height: 50vh;
-    width: 50vh;
-    margin:2vh;
-}
-
-#img-box {
-    display: flex;
+﻿#img-container-contact {
     text-align: center;
-    height: 100%;
-    width: 100%;
+    max-width: 65vh;
+    min-width: 35vh;
 }
 
-#img-add {
-    max-height: 100%;
-    max-width: 100%;
-    margin: auto;
-    vertical-align: middle;
-}
-
-.img-grid {
-    text-align: center;
+#contactDiv {
+    padding: 5vh 0;
+    align-content: center;
+    justify-content: center;
     align-items: center;
 }
 
-.icon {
+#img-contact {
+    max-width: 100%;
+    height: auto;
+    width: auto;
     vertical-align: middle;
-    margin: auto;
+    opacity: 0.8;
 }
 
-.form-margins{
-    margin: 1vh;
-}
-
-.landing-text {
+#contact-text {
     line-height: 4vh;
     text-align: center;
-    min-width: 360px;
+    max-width: 90vh;
+    min-width: 50vh;
     align-items: center;
 }
 
