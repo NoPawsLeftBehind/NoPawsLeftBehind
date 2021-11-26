@@ -53,6 +53,12 @@ namespace NoPawsLeftBehind.Controllers
             await Db.Connection.OpenAsync();
             Console.WriteLine(animal);
 
+            AnimalQuery addQuery = new AnimalQuery(Db);
+
+            await addQuery.addAnimal(animal.Type, animal.Breed, animal.Gender, animal.Name,
+                                    animal.Picture, animal.Availability, animal.Age, animal.Weight,
+                                    animal.Color, animal.Description, animal.News, animal.Dispositions);
+
             return new OkObjectResult(animal);
         }
     }

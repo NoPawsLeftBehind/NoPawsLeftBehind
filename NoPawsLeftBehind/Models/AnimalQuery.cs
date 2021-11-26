@@ -43,7 +43,8 @@ namespace NoPawsLeftBehind.Models
                                 LEFT JOIN Genders g ON a.genderID = g.genderID
                                 LEFT JOIN Availability av on a.availabilityID = av.availabilityID
                                 LEFT JOIN Colors c on a.colorID = c.colorID
-                                WHERE av.availability != 'Adopted';";
+                                WHERE av.availability != 'Adopted'
+                                ORDER BY dateCreated DESC;";
 
             return await ReadAllAsync(await cmd.ExecuteReaderAsync());
         }
@@ -111,7 +112,8 @@ namespace NoPawsLeftBehind.Models
                                                                             WHERE ad.animalID = a.animalID)";
             }
 
-            cmd.CommandText = cmd.CommandText + Environment.NewLine + @"AND av.availability != 'Adopted';";
+            cmd.CommandText = cmd.CommandText + Environment.NewLine + @"AND av.availability != 'Adopted'
+                                                                        ORDER BY dateCreated DESC;";
 
             //Bind parameters
             ApiHelper apiHelper = new ApiHelper();
@@ -216,6 +218,41 @@ namespace NoPawsLeftBehind.Models
                 return null;
 
             return animals[0];
+        }
+
+        public async Task addAnimal(int typeID, int breedID, int genderID, string name, string picture,
+                                    int availID, int age, int weight, int colorID, string desc, string news, List<int> dispositions)
+        {
+            using var cmd = Db.Connection.CreateCommand();
+            cmd.CommandText = @"INSERT INTO Animals (typeID, breedID, genderID, name, picture, availabilityID, age, weight, colorID, description, news)
+                                VALUES (@typeID, @breedID, @genderID, @name, @picture, @availabilityID, @age, @weight, @colorID, @desc, @news);";
+
+            ApiHelper apiHelper = new ApiHelper();
+            apiHelper.BindIntParam(cmd, Tuple.Create("@typeID", typeID));
+            apiHelper.BindIntParam(cmd, Tuple.Create("@breedID", breedID));
+            apiHelper.BindIntParam(cmd, Tuple.Create("@genderID", genderID));
+            apiHelper.BindStringParam(cmd, Tuple.Create("@name", name));
+            apiHelper.BindStringParam(cmd, Tuple.Create("@picture", picture));
+            apiHelper.BindIntParam(cmd, Tuple.Create("@availabilityID", availID));
+            apiHelper.BindIntParam(cmd, Tuple.Create("@age", age));
+            apiHelper.BindIntParam(cmd, Tuple.Create("@weight", weight));
+            apiHelper.BindIntParam(cmd, Tuple.Create("@colorID", colorID));
+            apiHelper.BindStringParam(cmd, Tuple.Create("@desc", desc));
+            apiHelper.BindStringParam(cmd, Tuple.Create("@news", news));
+
+            await cmd.ExecuteNonQueryAsync();
+
+            long newAnimalID = cmd.LastInsertedId;
+
+            foreach(int dispoID in dispositions)
+            {
+                cmd.CommandText = @"INSERT INTO Animals_Dispositions (animalID, dispositionID)
+                                    VALUES (" + newAnimalID + ", " + dispoID + ");";
+
+                await cmd.ExecuteNonQueryAsync();
+            }
+
+
         }
     }
 }
