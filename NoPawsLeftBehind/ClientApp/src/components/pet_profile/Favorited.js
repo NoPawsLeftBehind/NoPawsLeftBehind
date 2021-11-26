@@ -72,7 +72,6 @@ export default function Favorited({ auth0_obj, id }) {
     }
 
     React.useEffect(() => {
-        console.log('testing 123')
         if (auth0_obj.isAuthenticated == true) {
 
             console.log(getFavoritedStatus())

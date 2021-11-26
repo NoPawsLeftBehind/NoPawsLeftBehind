@@ -23,7 +23,8 @@ var pet_profile_info = {
     gender: 'none',
     age: 'none',
     color: 'none',
-    availability: 'none'
+    availability: 'none',
+    dateCreated: 'none'
 }
 
 export default function App() {
@@ -42,6 +43,7 @@ export default function App() {
 
     if (petInfo.availability == 'Available' && auth0_obj.isAuthenticated == true) {
         showButton = true
+
 
     }
 
@@ -145,9 +147,9 @@ export default function App() {
                 <Stack width="100%" display="flex" direction="column"
                     alignItems="center"
                       >
-                    <ActionAreaCard availability={petInfo.availability} auth0_obj={auth0_obj} id={id} />
+                    <ActionAreaCard picture={petInfo.picture} availability={petInfo.availability} favorited={favorited} auth0_obj={auth0_obj} id={id} />
 
-                    {true ? adopt_button : (<div> </div>)}
+                    {showButton ? adopt_button : (<div> </div>)}
                 </Stack>
             </Grid>
             <Grid

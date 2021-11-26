@@ -7,8 +7,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-function createData(name, calories) {
-    return { name, calories };
+function createData(name, trait) {
+    return { name, trait };
 }
 
 export default function PetTable({petTraits}) {
@@ -23,7 +23,9 @@ export default function PetTable({petTraits}) {
         createData("Breed", traits.breed),
         createData("Size", traits.weight),
         createData("Gender", traits.gender),
-        createData("Age", traits.age)
+        createData("Age", traits.age),
+        createData("Color", traits.color),
+        createData("Date Arrived", traits.dateCreated)
     ];
 
     return (
@@ -41,6 +43,7 @@ export default function PetTable({petTraits}) {
                             <h3>Pet Traits</h3>
                         </TableCell>
                         <TableCell sx={{ color: "#f3e5f5" }}>
+
                             
                         </TableCell>
                     </TableRow>
@@ -51,7 +54,7 @@ export default function PetTable({petTraits}) {
                             <TableCell component="th" scope="row">
                                 {row.name}
                             </TableCell>
-                            <TableCell align="right">{row.calories}</TableCell>
+                            <TableCell align="right">{row.trait}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
