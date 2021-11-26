@@ -219,5 +219,28 @@ namespace NoPawsLeftBehind.Models
 
             return animals[0];
         }
+
+        public async Task addAnimal(int typeID, int breedID, int genderID, string name, string picture,
+                                    int availID, int age, int weight, int colorID, string desc, string news)
+        {
+            using var cmd = Db.Connection.CreateCommand();
+            cmd.CommandText = @"INSERT INTO Animals (typeID, breedID, genderID, name, picture, availabilityID, age, weight, colorID, description, news)
+                                VALUES (@typeID, @breedID, @genderID, @name, @picture, @availabilityID, @age, @weight, @colorID, @desc, @news);";
+
+            ApiHelper apiHelper = new ApiHelper();
+            apiHelper.BindIntParam(cmd, Tuple.Create("@typeID", typeID));
+            apiHelper.BindIntParam(cmd, Tuple.Create("@breedID", breedID));
+            apiHelper.BindIntParam(cmd, Tuple.Create("@genderID", genderID));
+            apiHelper.BindStringParam(cmd, Tuple.Create("@name", name));
+            apiHelper.BindStringParam(cmd, Tuple.Create("@picture", picture));
+            apiHelper.BindIntParam(cmd, Tuple.Create("@availabilityID", availID));
+            apiHelper.BindIntParam(cmd, Tuple.Create("@age", age));
+            apiHelper.BindIntParam(cmd, Tuple.Create("@weight", weight));
+            apiHelper.BindIntParam(cmd, Tuple.Create("@colorID", colorID));
+            apiHelper.BindStringParam(cmd, Tuple.Create("@desc", desc));
+            apiHelper.BindStringParam(cmd, Tuple.Create("@news", news));
+
+            await cmd.ExecuteNonQueryAsync();
+        }
     }
 }

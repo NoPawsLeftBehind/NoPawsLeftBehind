@@ -47,11 +47,17 @@ namespace NoPawsLeftBehind.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> CreateAnimal([FromBody]CreateAnimal animal)
         {
             await Db.Connection.OpenAsync();
             Console.WriteLine(animal);
+
+            AnimalQuery addQuery = new AnimalQuery(Db);
+
+            await addQuery.addAnimal(animal.Type, animal.Breed, animal.Gender, animal.Name,
+                                    animal.Picture, animal.Availability, animal.Age, animal.Weight,
+                                    animal.Colors[0], animal.Description, animal.News);
 
             return new OkObjectResult(animal);
         }
