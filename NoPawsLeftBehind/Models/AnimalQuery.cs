@@ -221,7 +221,7 @@ namespace NoPawsLeftBehind.Models
         }
 
         public async Task addAnimal(int typeID, int breedID, int genderID, string name, string picture,
-                                    int availID, int age, int weight, int colorID, string desc, string news)
+                                    int availID, int age, int weight, int colorID, string desc, string news, List<int> dispositions)
         {
             using var cmd = Db.Connection.CreateCommand();
             cmd.CommandText = @"INSERT INTO Animals (typeID, breedID, genderID, name, picture, availabilityID, age, weight, colorID, description, news)
@@ -241,6 +241,18 @@ namespace NoPawsLeftBehind.Models
             apiHelper.BindStringParam(cmd, Tuple.Create("@news", news));
 
             await cmd.ExecuteNonQueryAsync();
+
+            long newAnimalID = cmd.LastInsertedId;
+
+            foreach(int dispoID in dispositions)
+            {
+                cmd.CommandText = @"INSERT INTO Animals_Dispositions (animalID, dispositionID)
+                                    VALUES (" + newAnimalID + ", " + dispoID + ");";
+
+                await cmd.ExecuteNonQueryAsync();
+            }
+
+
         }
     }
 }

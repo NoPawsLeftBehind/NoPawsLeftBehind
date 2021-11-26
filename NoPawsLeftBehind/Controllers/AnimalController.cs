@@ -57,7 +57,7 @@ namespace NoPawsLeftBehind.Controllers
 
             await addQuery.addAnimal(animal.Type, animal.Breed, animal.Gender, animal.Name,
                                     animal.Picture, animal.Availability, animal.Age, animal.Weight,
-                                    animal.Colors[0], animal.Description, animal.News);
+                                    animal.Color, animal.Description, animal.News, animal.Dispositions);
 
             return new OkObjectResult(animal);
         }
