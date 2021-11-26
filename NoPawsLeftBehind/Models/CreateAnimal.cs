@@ -17,7 +17,7 @@ namespace NoPawsLeftBehind.Models
         public string Picture { get; set; }
         public int Type { get; set; }
         public int Breed { get; set; }
-        public int Gender { get; set; }
+        public int Sex { get; set; }
         public int Availability { get; set; }
         public int Age { get; set; }
         public int Weight { get; set; }

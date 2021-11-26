@@ -23,7 +23,7 @@ export class AddPet extends Component {
             availability: -1,
             age: -1,
             weight: -1,
-            colors: [],
+            color: -1,
             dispositions: [],
             news: "",
             loading: true
@@ -120,11 +120,9 @@ export class AddPet extends Component {
         })
     }
 
-    handleColorsChange = (e) => {
-        const val = e.target.value;
-
+    handleColorChange = (e) => {
         this.setState({
-            colors: typeof val === 'string' ? val.split(',') : val,
+            color: e.target.value
         })
     }
 
@@ -188,7 +186,7 @@ export class AddPet extends Component {
                 availability: this.state.availability,
                 age: this.state.age,
                 weight: this.state.weight,
-                colors: this.state.colors,
+                color: this.state.color,
                 news: this.state.news,
                 dispositions: this.state.dispositions
             }
@@ -220,7 +218,7 @@ export class AddPet extends Component {
     }
 
     render() {
-        const { imagePreview, animalName, description, type, breed, sex, availability, colors, news, dispositions } = this.state;
+        const { imagePreview, animalName, description, type, breed, sex, availability, color, news, dispositions } = this.state;
 
         let attribute_data = null;
 
@@ -352,20 +350,19 @@ export class AddPet extends Component {
                                             onChange={this.handleWeightChange}
                                         />
                                     </FormControl>
+
+
                                     <FormControl fullWidth>
-                                        <InputLabel id="colors-label">Colors</InputLabel>
+                                        <InputLabel id="color-label">Primary Color</InputLabel>
                                         <Select className="form-margins"
-                                            labelId="colors-label"
-                                            id="colors-select"
-                                            multiple
-                                            value={colors}
-                                            label="Colors"
-                                            onChange={this.handleColorsChange}
+                                            labelId="color-label"
+                                            id="color-select"
+                                            value={color}
+                                            label="PrimaryColor"
+                                            onChange={this.handleColorChange}
                                         >
-                                            {attribute_data.colors && attribute_data.colors.map((item) =>
-                                                <MenuItem key={item.colorID} value={item.colorID}>
-                                                    {item.color}
-                                                </MenuItem>
+                                            {attribute_data.availabilities && attribute_data.colors.map((item) =>
+                                                <MenuItem key={item.colorID} value={item.colorID}>{item.color}</MenuItem>
                                             )}
                                         </Select>
                                     </FormControl>
