@@ -93,7 +93,7 @@ export class DashboardFavoritesList extends Component {
                                         </Typography>
                                     </CardContent>
                                     <CardActions sx={{ justifyContent: "center" }}>
-                                        <Button size="small" onClick={e => this.adopt(`${elem.id}`)}>Adopt</Button>
+                                        <Button size="small" variant="contained" onClick={e => this.adopt(`${elem.id}`)}>Adopt</Button>
                                     </CardActions>
                                 </Card>
                             </Grid>

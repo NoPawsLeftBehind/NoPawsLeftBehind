@@ -21,7 +21,7 @@ namespace NoPawsLeftBehind.Models
         public int Availability { get; set; }
         public int Age { get; set; }
         public int Weight { get; set; }
-        public List <int> Colors { get; set; }
+        public int Color { get; set; }
         public string News { get; set; }
         public List<int> Dispositions { get; set; }
     }
