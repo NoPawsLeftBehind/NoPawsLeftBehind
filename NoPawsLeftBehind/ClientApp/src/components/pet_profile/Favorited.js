@@ -38,14 +38,7 @@ export default function Favorited({ auth0_obj, id }) {
                 setSelected(body)
 
             });
-
-            
-           
-            
         });
-
-        
-
     }
 
     const updateFavoritedStatus = async function updateFavorited(s) {
@@ -75,7 +68,7 @@ export default function Favorited({ auth0_obj, id }) {
             console.log(response);
         });
 
-        console.log(data)
+        // console.log(data)
     }
 
     React.useEffect(() => {
@@ -88,16 +81,6 @@ export default function Favorited({ auth0_obj, id }) {
     }, []);
 
     if (auth0_obj.isAuthenticated == true) {
-
-
-        /*
-        getFavoritedStatus().then((response) => {
-
-            var data = response
-            return (data)
-
-        });
-        */
 
         getFavoritedStatus()
     }
