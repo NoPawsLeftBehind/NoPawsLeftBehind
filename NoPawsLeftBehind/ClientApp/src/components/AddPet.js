@@ -241,21 +241,21 @@ export class AddPet extends Component {
                             justifyContent="center"
                             style={{ flexGrow: 1 }}
                         >
-                            <Grid item xs={12} sm={12} md={6} justify="center" alignItems="center" className="img-grid">
+                            <Grid item xs={12} sm={12} md={12} lg={6} justify="center" alignItems="center" className="img-grid">
                                 <Paper variant="outlined" id="img-paper-add">
-                                    <Box p={1} id="img-box">
+                                    <Container p={1} id="img-box" alignItems="center">
                                         {imagePreview && (
                                             <img src={imagePreview} alt="" id="img-add" />
                                         )}
                                         {!imagePreview && (
                                             <InsertPhotoOutlinedIcon color="primary" fontSize="large" className="icon" />
                                         )}
-                                    </Box>
+                                    </Container>
                                 </Paper>
                                 <input type="file" onChange={this.updateImage} />
                             </Grid>
 
-                            <Grid item xs={12} sm={12} md={6} justify="center" alignItems="center">
+                            <Grid item xs={12} sm={12} md={12} lg={6} justify="center" alignItems="center">
                                 <Box component="form">
                                     <FormControl fullWidth>
                                         <InputLabel htmlFor="animalName">Animal Name</InputLabel>

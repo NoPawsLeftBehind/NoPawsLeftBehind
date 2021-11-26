@@ -1,7 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { Nav, Navbar, Container} from 'react-bootstrap';
 import { ThemeProvider } from '@mui/material/styles';
-import '../style/Header.css';
 import { appTheme } from './Theme.js'
 import PetsIcon from '@mui/icons-material/Pets';
 import LoginButton from './LoginButton';
@@ -9,6 +8,7 @@ import LogoutButton from './LogoutButton';
 import SignupButton from './SignupButton';
 import DashboardButton from './DashboardButton';
 import AddPetNavLink from './AddPetNavLink';
+import '../style/Header.css';
 
 export class Header extends Component {
     constructor(props) {
@@ -38,11 +38,11 @@ export class Header extends Component {
                             <Navbar.Collapse id="responsive-navbar-nav">
                                 <Nav className="me-auto">
                                     <Nav.Link className="mx-4" href="/">Home</Nav.Link>
-                                    <Nav.Link className="mx-4" href="/counter">About</Nav.Link>
+                                    <Nav.Link className="mx-4" href="/about">About</Nav.Link>
                                     <AddPetNavLink />
                                     <Nav.Link className="mx-4" href="/search">Pet Search</Nav.Link>
-                                    <Nav.Link className="mx-4" href="/counter">Contact</Nav.Link>
-                                    <Nav.Link className="mx-4" href="/fetch-data">FAQ</Nav.Link>
+                                    <Nav.Link className="mx-4" href="/contact">Contact</Nav.Link>
+                                    <Nav.Link className="mx-4" href="/faq">FAQ</Nav.Link>
                                 </Nav>
                                 <Nav>
                                     <SignupButton />
