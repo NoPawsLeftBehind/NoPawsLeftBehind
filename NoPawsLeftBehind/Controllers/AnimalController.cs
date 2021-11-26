@@ -47,7 +47,7 @@ namespace NoPawsLeftBehind.Controllers
         }
 
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> CreateAnimal([FromBody]CreateAnimal animal)
         {
             await Db.Connection.OpenAsync();
