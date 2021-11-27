@@ -6,10 +6,15 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import Favorited from "./Favorited";
 
-export default function ActionAreaCard({ availability }) {
+export default function ActionAreaCard({ availability, picture, favorited, auth0_obj, id}) {
 
     const [adoptionStatus, setAdoptionStatus] = React.useState(availability);
     const [available, setAvailable] = React.useState(true)
+
+    if (auth0_obj.isAuthenticated == true) {
+        favorited = true
+
+    }
 
     React.useEffect(() => {
         console.log(adoptionStatus)
@@ -22,8 +27,8 @@ export default function ActionAreaCard({ availability }) {
             <CardActionArea>
                 <CardMedia
                     component="img"
-                    height="auto"
-                    image="https://i.imgur.com/OgFgez7.jpg"
+                    Height="300"
+                    image={picture}
                     alt="green iguana"
                 />
                 <CardContent sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -31,7 +36,7 @@ export default function ActionAreaCard({ availability }) {
                         Status: {adoptionStatus}
           </Typography>
 
-                    <Favorited />
+                    {favorited ? (<Favorited auth0_obj={auth0_obj} id={id} />) : (<div> </div>)}
                 </CardContent>
             </CardActionArea>
         </Card>
