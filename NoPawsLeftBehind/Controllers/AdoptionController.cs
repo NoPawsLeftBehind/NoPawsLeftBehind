@@ -90,7 +90,7 @@ namespace NoPawsLeftBehind.Controllers
                 return new ObjectResult("No availability status to update.");
             }
             
-            return new ObjectResult("Availability Updated!");
+            return new OkObjectResult("Availability Updated!");
         }
     }
 }

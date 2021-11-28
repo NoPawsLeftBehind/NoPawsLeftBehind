@@ -19,11 +19,34 @@ export class DashboardAdoptList extends Component {
         this.populatePendingAdoptionData();
     }
 
-    approveAdopt = async e => {
+    async populatePendingAdoptionData() {
         try {
             const { getAccessTokenSilently } = this.props.auth0;
             const token = await getAccessTokenSilently();
 
+            const response = await fetch(
+                `api/adoption`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                },
+            );
+
+            const data = await response.json();
+            this.setState({ adoptions: data, loading: false });
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
+    approveAdopt = async e => {
+        const { getAccessTokenSilently } = this.props.auth0;
+        const token = await getAccessTokenSilently();
+
+        try {
             const payload = {
                 animalID: e,
                 status: 'approve'
@@ -39,23 +62,27 @@ export class DashboardAdoptList extends Component {
                     },
                     body: JSON.stringify(payload)
                 },
-            );
-
-            const data = await response.json();
-            this.setState({ adoptions: data, loading: false });
+            ).then(async res => {
+                console.log(res.json());
+                if (res.status >= 200 && res.status <= 300) {
+                    const data = await this.populatePendingAdoptionData();
+                    alert("Adoption approved!");
+                }
+                else {
+                    alert("Error: Could not approve adoption!");
+                }
+            }).catch(error => console.log(error));
         }
         catch (error) {
             console.log(error);
         }
-
-        this.populatePendingAdoptionData();
     }
 
     denyAdopt = async e => {
-        try {
-            const { getAccessTokenSilently } = this.props.auth0;
-            const token = await getAccessTokenSilently();
+        const { getAccessTokenSilently } = this.props.auth0;
+        const token = await getAccessTokenSilently();
 
+        try {
             const payload = {
                 animalID: e,
                 status: 'deny'
@@ -71,16 +98,20 @@ export class DashboardAdoptList extends Component {
                     },
                     body: JSON.stringify(payload)
                 },
-            );
-
-            const data = await response.json();
-            this.setState({ adoptions: data, loading: false });
+            ).then(async res => {
+                console.log(res.json());
+                if (res.status >= 200 && res.status <= 300) {
+                    const data = await this.populatePendingAdoptionData();
+                    alert("Adoption denied!");
+                }
+                else {
+                    alert("Error: Could not deny adoption!");
+                }
+            }).catch(error => console.log(error));
         }
         catch (error) {
             console.log(error);
         }
-
-        this.populatePendingAdoptionData();
     }
 
     render() {
@@ -114,7 +145,7 @@ export class DashboardAdoptList extends Component {
                                 <Card sx={{ minWidth: 150, m: 2, justfyContent: "center" }}>
                                     <CardMedia
                                         component="img"
-                                        alt="green iguana"
+                                        alt={`${elem.name}`}
                                         height="150"
                                         sx={{ width: "95%", height: 150, border: 1 }}
                                         image={`${elem.picture}`}
@@ -125,8 +156,8 @@ export class DashboardAdoptList extends Component {
                                         </Typography>
                                     </CardContent>
                                     <CardActions sx={{ justifyContent: "center" }}>
-                                        <Button size="small" variant="contained" onClick={e => this.approveAdopt(`${elem.id}`)}>Approve</Button>
-                                        <Button size="small" variant="outlined" onClick={e => this.denyAdopt(`${elem.id}`)} > Deny</Button>
+                                        <Button size="small" p={2} variant="contained" onClick={e => this.approveAdopt(`${elem.id}`)}>Approve</Button>
+                                        <Button size="small" p={2} variant="outlined" onClick={e => this.denyAdopt(`${elem.id}`)} > Deny</Button>
                                     </CardActions>
                                 </Card>
                             </Grid>
@@ -135,29 +166,6 @@ export class DashboardAdoptList extends Component {
                 </Container>
             )
         );
-    }
-
-    async populatePendingAdoptionData() {
-        try {
-            const { getAccessTokenSilently } = this.props.auth0;
-            const token = await getAccessTokenSilently();
-
-            const response = await fetch(
-                `api/adoption`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        'Content-Type': 'application/json',
-                    },
-                },
-            );
-
-            const data = await response.json();
-            this.setState({ adoptions: data, loading: false });
-        }
-        catch (error) {
-            console.log(error);
-        }
     }
 }
 

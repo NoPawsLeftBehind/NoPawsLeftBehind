@@ -142,12 +142,52 @@ export class AddPet extends Component {
 
     createPetProfile = async e => {
         if (this.state.animalName === "") {
-            alert("Animal Name cannot be null");
+            alert("Please enter a name.");
             return;
         }
 
         if (this.state.imageFile === null) {
-            alert("Picture cannot be null");
+            alert("Please select a profile picture.");
+            return;
+        }
+
+        if (this.state.type === -1) {
+            alert("Please select a Type");
+            return;
+        }
+
+        if (this.state.breed === -1) {
+            alert("Please select a Breed");
+            return;
+        }
+
+        if (this.state.sex === -1) {
+            alert("Please select a Sex.");
+            return;
+        }
+
+        if (this.state.availability === -1) {
+            alert("Please choose an Availability.");
+            return;
+        }
+
+        if (this.state.type === -1) {
+            alert("Please select a Type");
+            return;
+        }
+
+        if (this.state.type === -1) {
+            alert("Please enter an Age.");
+            return;
+        }
+
+        if (this.state.type === -1) {
+            alert("Please enter a Weight.");
+            return;
+        }
+
+        if (this.state.color === -1) {
+            alert("Please select a primary Color.");
             return;
         }
 
