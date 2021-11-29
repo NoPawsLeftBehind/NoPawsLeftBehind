@@ -59,7 +59,8 @@ export default function FilterPets(props) {
 
     const postRequest = async function postRequest(url = '', payload = {}) {
 
-
+        console.log('payload')
+        console.log(payload)
         const response = await fetch(url, {
             method: 'POST', 
             mode: 'cors', 
@@ -75,7 +76,7 @@ export default function FilterPets(props) {
         });
 
         const data = await response.json();
-        console.log('test20')
+        console.log('output json')
         console.log(data)
         return { animals: data, loading: false }
     }
@@ -137,7 +138,6 @@ export default function FilterPets(props) {
 
         }
 
-
         console.log('test30')
         console.log(values.dateCreated)
         console.log(values_submit)
@@ -162,6 +162,8 @@ export default function FilterPets(props) {
             setFilterResults(result)
 
         })
+
+        
     };
 
     const drawer = (
@@ -183,7 +185,7 @@ export default function FilterPets(props) {
                                         Type
                                     </InputLabel>
                                     <NativeSelect
-                                        defaultValue={'hello_world'}
+                                        defaultValue={''}
                                         onChange={handleChange}
                                         name="type"
                                         id="type"
@@ -200,7 +202,7 @@ export default function FilterPets(props) {
                                         Breed
                                     </InputLabel>
                                     <NativeSelect
-                                        defaultValue={'hello_world'}
+                                        defaultValue={''}
                                         onChange={handleChange}
                                         name="breed"
                                         id="breed"

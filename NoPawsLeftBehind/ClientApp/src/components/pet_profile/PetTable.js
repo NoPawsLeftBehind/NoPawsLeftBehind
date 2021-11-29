@@ -11,12 +11,23 @@ function createData(name, trait) {
     return { name, trait };
 }
 
-export default function PetTable({petTraits}) {
+export default function PetTable({ petTraits }) {
     const [traits, setTraits] = React.useState(petTraits);
 
     React.useEffect(() => {
         setTraits(petTraits);
     }, [petTraits]);
+
+    console.log(traits.dispositions)
+
+    let dispositions = []
+
+    for (let i of traits.dispositions) {
+        dispositions.push(i.disposition)
+    }
+    
+
+
 
     const rows = [
         createData("Type", traits.type),
@@ -25,6 +36,8 @@ export default function PetTable({petTraits}) {
         createData("Gender", traits.gender),
         createData("Age", traits.age),
         createData("Color", traits.color),
+        createData("Dispositions", dispositions.join()),
+
         createData("Date Arrived", traits.dateCreated)
     ];
 

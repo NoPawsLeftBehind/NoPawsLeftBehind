@@ -24,6 +24,7 @@ var pet_profile_info = {
     age: 'none',
     color: 'none',
     availability: 'none',
+    dispositions: 'none',
     dateCreated: 'none'
 }
 
@@ -33,6 +34,7 @@ export default function App() {
     const [petInfo, setPetInfo] = React.useState(pet_profile_info)
     const [isPetProfile, setIsPetProfile] = React.useState(true)
     const [isUserLogged, setisUserLogged] = React.useState(false)
+    const [adoptClicked, setAdoptClicked] = React.useState(false)
 
     const auth0_obj = useAuth0();
     console.log(auth0_obj)
@@ -92,13 +94,10 @@ export default function App() {
             console.log(response);
         });
 
-        
-        console.log('hello_world')
         console.log(data)
-        
 
 
-
+        setAdoptClicked(!adoptClicked)
         
     }
     
@@ -115,7 +114,7 @@ export default function App() {
             }
         });
 
-    }, []);
+    }, [adoptClicked]);
 
 
 
