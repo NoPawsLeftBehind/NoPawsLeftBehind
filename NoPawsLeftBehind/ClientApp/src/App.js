@@ -10,6 +10,7 @@ import { VerifyEmail } from './components/VerifyEmail';
 import PetProfile from './components/pet_profile/PetProfile';
 import { Contact } from './components/Contact';
 import './custom.css';
+import FAQ from './components/FAQ';
 
 export default class App extends Component {
     static displayName = App.name;
@@ -25,6 +26,7 @@ export default class App extends Component {
                 <Route path='/verify-email' component={VerifyEmail} />
                 <Route path='/pet-profile/:id' component={PetProfile} />
                 <Route path='/contact' component={Contact} />
+                <Route path='/faq' component={FAQ} />
             </Layout>
         );
     }
