@@ -23,7 +23,7 @@ export class AddPet extends Component {
             availability: -1,
             age: -1,
             weight: -1,
-            colors: [],
+            color: -1,
             dispositions: [],
             news: "",
             loading: true
@@ -120,11 +120,9 @@ export class AddPet extends Component {
         })
     }
 
-    handleColorsChange = (e) => {
-        const val = e.target.value;
-
+    handleColorChange = (e) => {
         this.setState({
-            colors: typeof val === 'string' ? val.split(',') : val,
+            color: e.target.value
         })
     }
 
@@ -144,12 +142,52 @@ export class AddPet extends Component {
 
     createPetProfile = async e => {
         if (this.state.animalName === "") {
-            alert("Animal Name cannot be null");
+            alert("Please enter a name.");
             return;
         }
 
         if (this.state.imageFile === null) {
-            alert("Picture cannot be null");
+            alert("Please select a profile picture.");
+            return;
+        }
+
+        if (this.state.type === -1) {
+            alert("Please select a Type");
+            return;
+        }
+
+        if (this.state.breed === -1) {
+            alert("Please select a Breed");
+            return;
+        }
+
+        if (this.state.sex === -1) {
+            alert("Please select a Sex.");
+            return;
+        }
+
+        if (this.state.availability === -1) {
+            alert("Please choose an Availability.");
+            return;
+        }
+
+        if (this.state.type === -1) {
+            alert("Please select a Type");
+            return;
+        }
+
+        if (this.state.type === -1) {
+            alert("Please enter an Age.");
+            return;
+        }
+
+        if (this.state.type === -1) {
+            alert("Please enter a Weight.");
+            return;
+        }
+
+        if (this.state.color === -1) {
+            alert("Please select a primary Color.");
             return;
         }
 
@@ -188,7 +226,7 @@ export class AddPet extends Component {
                 availability: this.state.availability,
                 age: this.state.age,
                 weight: this.state.weight,
-                colors: this.state.colors,
+                color: this.state.color,
                 news: this.state.news,
                 dispositions: this.state.dispositions
             }
@@ -220,13 +258,39 @@ export class AddPet extends Component {
     }
 
     render() {
-        const { imagePreview, animalName, description, type, breed, sex, availability, colors, news, dispositions } = this.state;
+        const { imagePreview, animalName, description, type, breed, sex, availability, color, news, dispositions } = this.state;
 
         let attribute_data = null;
 
         if (this.state.attributes) {
             attribute_data = this.state.attributes;
         }
+
+        const typeBreedList = {};
+
+        if (attribute_data && attribute_data.animalTypes) {
+            for (var i = 0; i < attribute_data.animalTypes.length; i++) {
+                var typeItem = attribute_data.animalTypes[i];
+                var breedList = attribute_data.breeds.filter(b => b.typeID === typeItem.typeID).sort(function (x, y) {
+                    var x_name = x.breedName.toLowerCase();
+                    var y_name = y.breedName.toLowerCase();
+
+                    if (x_name < y_name)
+                        return -1;
+
+                    if (x_name > y_name)
+                        return 1;
+
+                    return 0;
+                });
+
+                typeBreedList[typeItem.typeID] = breedList;
+            }
+        }
+
+        const selectedBreedList = typeBreedList[type];
+
+        console.log(breedList);
 
         return (
             attribute_data && (
@@ -243,7 +307,7 @@ export class AddPet extends Component {
                         >
                             <Grid item xs={12} sm={12} md={12} lg={6} justify="center" alignItems="center" className="img-grid">
                                 <Paper variant="outlined" id="img-paper-add">
-                                    <Container p={1} id="img-box" alignItems="center">
+                                    <Container p={1} id="img-box">
                                         {imagePreview && (
                                             <img src={imagePreview} alt="" id="img-add" />
                                         )}
@@ -301,7 +365,7 @@ export class AddPet extends Component {
                                             label="Breed"
                                             onChange={this.handleBreedChange}
                                         >
-                                            {attribute_data.breeds && attribute_data.breeds.map((item) =>
+                                            {selectedBreedList && selectedBreedList.map((item) =>
                                                 <MenuItem key={item.breedID} value={item.breedID}>{item.breedName}</MenuItem>
                                             )}
                                         </Select>
@@ -353,19 +417,16 @@ export class AddPet extends Component {
                                         />
                                     </FormControl>
                                     <FormControl fullWidth>
-                                        <InputLabel id="colors-label">Colors</InputLabel>
+                                        <InputLabel id="color-label">Primary Color</InputLabel>
                                         <Select className="form-margins"
-                                            labelId="colors-label"
-                                            id="colors-select"
-                                            multiple
-                                            value={colors}
-                                            label="Colors"
-                                            onChange={this.handleColorsChange}
+                                            labelId="color-label"
+                                            id="color-select"
+                                            value={color}
+                                            label="PrimaryColor"
+                                            onChange={this.handleColorChange}
                                         >
-                                            {attribute_data.colors && attribute_data.colors.map((item) =>
-                                                <MenuItem key={item.colorID} value={item.colorID}>
-                                                    {item.color}
-                                                </MenuItem>
+                                            {attribute_data.availabilities && attribute_data.colors.map((item) =>
+                                                <MenuItem key={item.colorID} value={item.colorID}>{item.color}</MenuItem>
                                             )}
                                         </Select>
                                     </FormControl>
