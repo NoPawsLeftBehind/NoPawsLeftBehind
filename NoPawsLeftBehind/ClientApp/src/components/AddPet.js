@@ -266,6 +266,32 @@ export class AddPet extends Component {
             attribute_data = this.state.attributes;
         }
 
+        const typeBreedList = {};
+
+        if (attribute_data && attribute_data.animalTypes) {
+            for (var i = 0; i < attribute_data.animalTypes.length; i++) {
+                var typeItem = attribute_data.animalTypes[i];
+                var breedList = attribute_data.breeds.filter(b => b.typeID === typeItem.typeID).sort(function (x, y) {
+                    var x_name = x.breedName.toLowerCase();
+                    var y_name = y.breedName.toLowerCase();
+
+                    if (x_name < y_name)
+                        return -1;
+
+                    if (x_name > y_name)
+                        return 1;
+
+                    return 0;
+                });
+
+                typeBreedList[typeItem.typeID] = breedList;
+            }
+        }
+
+        const selectedBreedList = typeBreedList[type];
+
+        console.log(breedList);
+
         return (
             attribute_data && (
                 <ThemeProvider theme={appTheme}>
@@ -281,7 +307,7 @@ export class AddPet extends Component {
                         >
                             <Grid item xs={12} sm={12} md={12} lg={6} justify="center" alignItems="center" className="img-grid">
                                 <Paper variant="outlined" id="img-paper-add">
-                                    <Container p={1} id="img-box" alignItems="center">
+                                    <Container p={1} id="img-box">
                                         {imagePreview && (
                                             <img src={imagePreview} alt="" id="img-add" />
                                         )}
@@ -339,7 +365,7 @@ export class AddPet extends Component {
                                             label="Breed"
                                             onChange={this.handleBreedChange}
                                         >
-                                            {attribute_data.breeds && attribute_data.breeds.map((item) =>
+                                            {selectedBreedList && selectedBreedList.map((item) =>
                                                 <MenuItem key={item.breedID} value={item.breedID}>{item.breedName}</MenuItem>
                                             )}
                                         </Select>
@@ -390,8 +416,6 @@ export class AddPet extends Component {
                                             onChange={this.handleWeightChange}
                                         />
                                     </FormControl>
-
-
                                     <FormControl fullWidth>
                                         <InputLabel id="color-label">Primary Color</InputLabel>
                                         <Select className="form-margins"
