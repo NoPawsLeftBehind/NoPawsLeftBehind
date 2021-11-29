@@ -12,14 +12,12 @@ const DashboardUser = () => {
 
     return (
         !(user["https://nopawsleftbehind.azurewebsites.net/role"] === "admin") && (
-            <div className="top-bottom-margin">
-                <Paper elevation={3} id="favorites-paper">
-                    <Box p={2}>
-                        <h2>Favorited Animals</h2>
-                        <Divider />
-                        <DashboardFavoritesList/>
-                    </Box>
-                </Paper>
+            <div>
+                <Box p={2} className="center-items">
+                    <h2>Favorited Animals</h2>
+                    <Divider />
+                    <DashboardFavoritesList />
+                </Box>
             </div>
         )
     );
