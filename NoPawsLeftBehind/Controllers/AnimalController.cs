@@ -55,11 +55,19 @@ namespace NoPawsLeftBehind.Controllers
 
             AnimalQuery addQuery = new AnimalQuery(Db);
 
-            await addQuery.addAnimal(animal.Type, animal.Breed, animal.Gender, animal.Name,
-                                    animal.Picture, animal.Availability, animal.Age, animal.Weight,
-                                    animal.Color, animal.Description, animal.News, animal.Dispositions);
+            try
+            {
+                await addQuery.addAnimal(animal.Type, animal.Breed, animal.Sex, animal.Name,
+                        animal.Picture, animal.Availability, animal.Age, animal.Weight,
+                        animal.Color, animal.Description, animal.News, animal.Dispositions);
 
-            return new OkObjectResult(animal);
+                return new OkObjectResult(animal);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return new ObjectResult(ex);
+            }
         }
     }
 }

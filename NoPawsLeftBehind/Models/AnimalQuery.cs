@@ -246,13 +246,17 @@ namespace NoPawsLeftBehind.Models
 
             foreach(int dispoID in dispositions)
             {
-                cmd.CommandText = @"INSERT INTO Animals_Dispositions (animalID, dispositionID)
-                                    VALUES (" + newAnimalID + ", " + dispoID + ");";
+                cmd.CommandText = @"INSERT INTO Animals_Dispositions (animalID, dispositionID) VALUES (" + newAnimalID + ", " + dispoID + ");";
 
-                await cmd.ExecuteNonQueryAsync();
+                try
+                {
+                    await cmd.ExecuteNonQueryAsync();
+                }
+                catch (Exception ex)
+                {
+                    Console.Write(ex);
+                }
             }
-
-
         }
     }
 }
