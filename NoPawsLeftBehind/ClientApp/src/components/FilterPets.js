@@ -76,6 +76,8 @@ export default function FilterPets(props) {
         });
 
         const data = await response.json();
+
+
         console.log('output json')
         console.log(data)
         return { animals: data, loading: false }
