@@ -112,8 +112,16 @@ namespace NoPawsLeftBehind.Models
                                                                             WHERE ad.animalID = a.animalID)";
             }
 
-            cmd.CommandText = cmd.CommandText + Environment.NewLine + @"AND av.availability != 'Adopted'
+            if (choices.AnimalType == "" && choices.Breed == "" && choices.Disposition == "")
+            {
+                cmd.CommandText = cmd.CommandText + Environment.NewLine + @"WHERE av.availability != 'Adopted'
                                                                         ORDER BY dateCreated DESC;";
+            }
+            else
+            {
+                cmd.CommandText = cmd.CommandText + Environment.NewLine + @"AND av.availability != 'Adopted'
+                                                                        ORDER BY dateCreated DESC;";
+            }
 
             //Bind parameters
             ApiHelper apiHelper = new ApiHelper();

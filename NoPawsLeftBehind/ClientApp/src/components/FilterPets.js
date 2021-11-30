@@ -247,9 +247,8 @@ export default function FilterPets(props) {
                                         name="dateCreated"
                                         id="dateCreated"
                                     >
-                                        <option value={''}>None</option>
-                                            <option value={0}>{'newest to oldest'}</option>
-                                            <option value={1}>{'oldest to newest'}</option>
+                                            <option value={0}>{'Newest to Oldest'}</option>
+                                            <option value={1}>{'Oldest to Newest'}</option>
                                     </NativeSelect>
                                 </FormControl>
 

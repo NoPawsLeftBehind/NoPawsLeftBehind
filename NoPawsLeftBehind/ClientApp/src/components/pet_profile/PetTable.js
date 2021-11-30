@@ -32,7 +32,7 @@ export default function PetTable({ petTraits }) {
     const rows = [
         createData("Type", traits.type),
         createData("Breed", traits.breed),
-        createData("Size", traits.weight),
+        createData("Weight (lbs)", traits.weight),
         createData("Gender", traits.gender),
         createData("Age", traits.age),
         createData("Color", traits.color),
